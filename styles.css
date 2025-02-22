@@ -8,7 +8,7 @@
 }
 
 body {
-    background: #ffffff;
+    background: rgb(239, 239, 239);
     color: #000;
 }
 
@@ -18,7 +18,7 @@ header {
     align-items: center;
     justify-content: space-between;
     padding: 20px 5%;
-    background: white;
+    background: rgb(239, 239, 239);
 }
 
 .logo img {
@@ -46,7 +46,11 @@ nav ul li a {
     color: #fff;
     padding: 10px 15px;
     text-decoration: none;
-    border-radius: 5px;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 15px;
+
 }
 
 .hero {
@@ -81,7 +85,10 @@ nav ul li a {
     padding: 10px 20px;
     margin-right: 10px;
     text-decoration: none;
-    border-radius: 5px;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 15px;
     font-weight: bold;
 }
 
