@@ -52,7 +52,10 @@ nav ul li a {
     border-bottom-right-radius: 15px;
 
 }
-
+.btn-login:hover{
+    background: #bb0322;
+    color: rgb(239, 239, 239)
+}
 .hero {
     display: flex;
     align-items: center;
@@ -96,10 +99,18 @@ nav ul li a {
     background: #000;
     color: #fff;
 }
+.btn-menu:hover {
+    
+    color:rgb(239, 239, 239) ;
+}
 
 .btn-book {
     background: #d90429;
     color: #fff;
+}
+.btn-book:hover{
+    background: #bb0322;
+    color: rgb(239, 239, 239)
 }
 
 .social-icons {
