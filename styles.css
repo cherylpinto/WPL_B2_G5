@@ -63,11 +63,11 @@ nav ul li :hover{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 60px 5%;
+    padding: 10px 5%;
 }
 
 .hero-content {
-    max-width: 50%;
+    max-width: 40%;
 }
 
 .hero-content h1 {
@@ -80,6 +80,7 @@ nav ul li :hover{
     margin: 20px 0;
     font-size: 14px;
     color: #555;
+
 }
 
 .buttons {
@@ -129,6 +130,15 @@ nav ul li :hover{
 }
 
 .hero-image img {
-    width: 500px;
+    width: 420px;
     border-radius: 15px;
+}
+.hero-image .img1{
+    position: relative;
+
+}
+.hero-image .img2{
+    position: absolute;
+    right:25%;
+    top:56%;
 }
