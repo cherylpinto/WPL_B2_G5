@@ -38,3 +38,8 @@
     color: #666;
     margin-top: 10px;
 }
+.chef-card h2 {
+    color:#d90429;
+    font-style: italic;
+    font-family: 'Dancing Script', cursive;
+}
