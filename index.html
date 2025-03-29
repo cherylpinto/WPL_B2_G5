@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="menu.css">
     <link rel="stylesheet" href="chefsection.css">
+    <link rel="stylesheet" href="feedback.css">
+    <link rel="stylesheet" href="reservation.css">
+    <link rel="stylesheet" href="footer.css">
 </head>
 <body>
     <header>
@@ -34,9 +37,15 @@
                 <a href="#" class="btn-book">Book a table</a>
             </div>
             <div class="social-icons">
-                <a href="#"><img src="images/facebook.png" alt="Facebook"></a>
-                <a href="#"><img src="images/insta.jpg" alt="Instagram"></a>
-                <a href="#"><img src="images/twitter.jpg" alt="Twitter"></a>
+                <div class="facebook">
+                    <a href="#"><img src="images/facebook.png" alt="Facebook"></a>
+                </div>
+                <div class="instagram">
+                    <a href="#"><img src="images/insta.jpg" alt="Instagram"></a>
+                </div>
+                <div class="twitter">
+                    <a href="#"><img src="images/twitter.jpg" alt="Twitter"></a>
+                </div>
             </div>
         </div>
         <div class="hero-image">
@@ -136,15 +145,6 @@
             </div>
         </div>
     </section>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Expert Chefs</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
     <section class="chefs-section">
         <h2 class="section-title">Our Expert Chefs</h2>
         <div class="chefs-container">
@@ -162,6 +162,118 @@
             </div>
         </div>
     </section>
+    <section class="testimonials">
+        <h2>Our Happy Customers</h2>
+        <button class="slider-btn prev">&#10094;</button>
+        <div class="testimonial-slider">
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <h4>Ama Ampomah</h4>
+                <span>CEO & Founder Inc</span>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <h4>Kweku Annan</h4>
+                <span>CEO & Founder Inc</span>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐</div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <h4>Sarah Johnson</h4>
+                <span>CTO, Tech Solutions</span>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐</div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <h4>John Paterson</h4>
+                <span>CEO, Caltech Solutions</span>
+            </div>
+        </div>
+        <button class="slider-btn next">&#10095;</button>
+    </section>
+
+        <section class="reservation">
+            <div class="reservation-container">
+                <div class="reservation-image">
+                    <img src="images/reservation.png" alt="Restaurant Interior">
+                </div>
+                <div class="reservation-form">
+                    <h2>Reserve a table</h2>
+                    <form action="#" method="post">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+        
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Enter your number" required>
+        
+                        <label for="email">Email ID</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email id" required>
+        
+                        <label for="date">Date</label>
+                        <input type="date" id="date" name="date" required>
+        
+                        <label for="time">Time</label>
+                        <input type="time" id="time" name="time" required>
+        
+                        <label for="people">Number of people</label>
+                        <input type="number" id="people" name="people" placeholder="Number of people" required>
+        
+                        <label for="requests">Special Requests</label>
+                        <textarea id="requests" name="requests" placeholder="Any special requests..."></textarea>
+        
+                        <button type="submit" class="btn-reserve">Reserve</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <div class="footer-container">
+                <div class="footer-logo">
+                    <img src="images/logo.png">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+                </div>
+                
+                <div class="footer-hours">
+                    <h3>OPENING HOURS</h3>
+                    <p>Monday - Friday <br> 8:00 am to 9:00 pm</p>
+                    <p>Saturday <br> 8:00 am to 11:00 pm</p>
+                    <p>Sunday <br> 12:00 pm to 12:00 am</p>
+                </div>
+                
+                <div class="footer-nav">
+                    <h3>NAVIGATION</h3>
+                    <ul>
+                        <li><a href="#">Menu</a></li>
+                        <li><a href="#">About us</a></li>
+                        <li><a href="#">Contact us</a></li>
+                        <li><a href="#">Main dishes</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-social">
+                    <h3>FOLLOW US</h3>
+                    <div class="social-icons">
+                        <a href="#"><img src="images/facebook.png" alt="Facebook"></a>
+                        <a href="#"><img src="images/insta.jpg" alt="Instagram"></a>
+                        <a href="#"><img src="images/twitter.jpg" alt="X"></a>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="footer-bottom">
+                <p>© 2025 Aurelia's. All Rights Reserved. Designed by Cheryl and Dhiti</p>
+                <div class="footer-links">
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+        </footer>
+        
+
+
+    <script src="feedback.js"></script>
 
 </body>
 </html>

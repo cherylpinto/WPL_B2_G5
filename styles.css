@@ -75,8 +75,9 @@ nav ul li a:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 100px 5% 40px;
+    padding: 125px 5% 40px;
     min-height: 100vh;
+    margin-bottom: 50px;;
 }
 
 .hero-content {
@@ -85,12 +86,14 @@ nav ul li a:hover {
 
 .hero-content h1 {
     font-family: 'Playfair Display', serif;
-    font-size: 40px;
+    font-size: 50px;
     line-height: 1.2;
+    font-weight: 600;
+    font-style: italic;
 }
 
 .hero-content p {
-    margin: 20px 0;
+    margin: 40px 0;
     font-size: 16px;
     color: #555;
 }
@@ -130,12 +133,19 @@ nav ul li a:hover {
 }
 
 .social-icons {
-    margin-top: 20px;
+    margin-top: 30px;
+    display: flex ;
+
+    
+}
+.facebook{
+    
 }
 
 .social-icons a {
     margin-right: 10px;
     transition: transform 0.3s ease-in-out;
+    
 }
 
 .social-icons a:hover {
@@ -143,8 +153,17 @@ nav ul li a:hover {
 }
 
 .social-icons img {
-    width: 25px;
+    width: 45px;
+    height: 45px;
+    border:1px solid black;
+    border-radius: 100%;
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    object-fit: contain;
+    padding: 5px;
+
 }
+
 
 .hero-image img {
     width: 420px;
@@ -163,5 +182,5 @@ nav ul li a:hover {
 .hero-image .img2 {
     position: absolute;
     right: 25%;
-    top: 56%;
+    top: 54%;
 }
