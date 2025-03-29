@@ -1,0 +1,59 @@
+#table-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* Create 5 columns */
+    grid-gap: 20px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.table {
+    width: 100px;
+    height: 100px;
+    background-color: #d3d3d3;
+    border-radius: 50%;
+    text-align: center;
+    /*line-height: 100px;*/
+    cursor: pointer;
+    font-size: 10px;
+    transition: 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    /*padding: 10px;
+    word-wrap: break-word;*/
+}
+
+/* Available tables */
+.table.available {
+    background-color: lightgreen;
+}
+
+/* Reserved tables */
+.table.reserved {
+    background-color: lightcoral !important;
+    cursor: not-allowed;
+}
+
+/* Selected tables */
+.table.selected {
+    background-color: lightblue !important;
+}
+
+/* Large tables */
+.table.large {
+    background-color: lightgreen;
+    width: 130px;
+    height: 130px;
+    font-size: 13px;
+    transition: 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.table:hover{
+    transform: scale(1.1);
+    transition: transform 0.2s;
+}
