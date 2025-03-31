@@ -138,10 +138,6 @@ nav ul li a:hover {
 
     
 }
-.facebook{
-    
-}
-
 .social-icons a {
     margin-right: 10px;
     transition: transform 0.3s ease-in-out;
@@ -184,3 +180,22 @@ nav ul li a:hover {
     right: 25%;
     top: 54%;
 }
+/* .user-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+.user-circle{
+    width: 40px;
+    height: 40px;
+    background-color: #666;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    text-transform: uppercase;
+}  */
