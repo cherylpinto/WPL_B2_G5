@@ -40,6 +40,12 @@
     background-color: #d90429 !important;
 }
 
+/*Suggested tables*/
+.table.suggested {
+    border: 3px solid black
+}
+
+
 /* Large tables */
 .table.large {
     background-color: lightgray;

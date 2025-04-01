@@ -60,7 +60,7 @@ if (!$isAuthenticated) {
             <p>Exquisite cuisine, fresh ingredients, inviting ambiance, and unforgettable flavors—crafted with passion for every occasion.</p>
             <div class="buttons">
                 <a href="#menu-section" class="btn-menu">Menu</a>
-                <a href="#" class="btn-book">Book a table</a>
+                <a href="#reservation" class="btn-book">Book a table</a>
             </div>
             <div class="social-icons">
                 <div class="facebook">
@@ -232,7 +232,8 @@ if (!$isAuthenticated) {
             </div>
             <div class="reservation-form">
                 <h2>Reserve a table</h2>
-                <form action="#" method="post">
+                <form id="reservation-form">
+                    <input type="hidden" id="selectedTable" name="table_id" value="">
                     <label for="name">Name</label>
                     <input type="text" id="name" name="name" placeholder="Enter your name" required>
 
@@ -256,6 +257,17 @@ if (!$isAuthenticated) {
 
                     <button type="submit" class="btn-reserve">Reserve</button>
                 </form>
+                <script>
+                        document.getElementById("reservation-form").addEventListener("submit", function(event) {
+                            event.preventDefault(); 
+                    
+                            const name = document.getElementById("name").value;
+                            const phone = document.getElementById("phone").value;
+                            const people = document.getElementById("people").value;
+                    
+                            window.location.href = `book_a_table.html?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&people=${encodeURIComponent(people)}`;
+                        });
+                    </script>
             </div>
         </div>
     </section>
