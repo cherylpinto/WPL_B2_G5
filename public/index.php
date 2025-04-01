@@ -306,7 +306,7 @@ if (!$isAuthenticated) {
 
 
 
-    <script src="/assets/feedback.js"></script>
+    <script src="../assets/feedback.js"></script>
 
 </body>
 

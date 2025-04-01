@@ -20,32 +20,47 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup</title>
-    <link rel="stylesheet" href="/assets/styles.css">
+    <link rel="stylesheet" href="../assets/signup.css">
 </head>
+
 <body>
     <?php if (isset($_SESSION['error'])): ?>
-        <p style="color: red;"><?php echo $_SESSION['error']; unset($_SESSION['error']); ?></p>
+        <p style="color: red;"><?php echo $_SESSION['error'];
+                                unset($_SESSION['error']); ?></p>
     <?php endif; ?>
-    
+
     <form action="signup.php" method="POST">
-        <h2>Signup</h2>
-        <label>First Name:</label>
-        <input type="text" name="first_name" required>
-        
-        <label>Last Name:</label>
-        <input type="text" name="last_name" required>
+        <div class="signup-container">
+            <img src="../images/logo.png">
+            <h2>Signup</h2>
+            <label>First Name:</label>
+            <input type="text" name="first_name" required>
 
-        <label>Email:</label>
-        <input type="email" name="email" required>
+            <label>Last Name:</label>
+            <input type="text" name="last_name" required>
 
-        <label>Password:</label>
-        <input type="password" name="password" required>
+            <label>Email:</label>
+            <input type="email" name="email" required>
 
-        <button type="submit">Sign Up</button>
+            <label>Password:</label>
+            <input type="password" name="password" required>
+
+            <?php if (isset($_SESSION['error'])): ?>
+                <div class="error-message" style="color: red; margin-bottom: 10px;">
+                    <?php echo $_SESSION['error'];
+                    unset($_SESSION['error']); ?>
+                </div>
+            <?php endif; ?>
+
+            <button type="submit">Sign Up</button>
+            <p>Have an account?<a href="login.php"> Login</a></p>
+        </div>
     </form>
 </body>
+
 </html>
