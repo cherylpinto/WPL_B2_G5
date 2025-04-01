@@ -232,8 +232,10 @@ if (!$isAuthenticated) {
             </div>
             <div class="reservation-form">
                 <h2>Reserve a table</h2>
+             
                 <form id="reservation-form">
                     <input type="hidden" id="selectedTable" name="table_id" value="">
+                    <input type="hidden"  name="user_id" value="<?php echo $_SESSION['user_id'] ?? ''; ?>">
                     <label for="name">Name</label>
                     <input type="text" id="name" name="name" placeholder="Enter your name" required>
 
@@ -250,24 +252,27 @@ if (!$isAuthenticated) {
                     <input type="time" id="time" name="time" required>
 
                     <label for="people">Number of people</label>
-                    <input type="number" id="people" name="people" placeholder="Number of people" required>
-
+                    <input type="number" id="people" name="people" placeholder="Number of people" required min="1" max="10">
                     <label for="requests">Special Requests</label>
                     <textarea id="requests" name="requests" placeholder="Any special requests..."></textarea>
 
                     <button type="submit" class="btn-reserve">Reserve</button>
                 </form>
                 <script>
-                        document.getElementById("reservation-form").addEventListener("submit", function(event) {
-                            event.preventDefault(); 
-                    
-                            const name = document.getElementById("name").value;
-                            const phone = document.getElementById("phone").value;
-                            const people = document.getElementById("people").value;
-                    
-                            window.location.href = `book_a_table.html?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&people=${encodeURIComponent(people)}`;
-                        });
-                    </script>
+                document.getElementById("reservation-form").addEventListener("submit", function(event) {
+    event.preventDefault(); 
+
+    const name = document.getElementById("name").value;
+    const phone = document.getElementById("phone").value;
+    const email = document.getElementById("email").value;
+    const date = document.getElementById("date").value;
+    const time = document.getElementById("time").value;
+    const people = document.getElementById("people").value;
+    const requests = document.getElementById("requests").value;
+
+    window.location.href = `book_a_table.html?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&email=${encodeURIComponent(email)}&date=${encodeURIComponent(date)}&time=${encodeURIComponent(time)}&people=${encodeURIComponent(people)}&requests=${encodeURIComponent(requests)}`;
+});
+</script>
             </div>
         </div>
     </section>
