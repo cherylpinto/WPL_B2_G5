@@ -1,8 +1,8 @@
 <?php
 $servername="localhost";
 $username="root";
-$password="";
-$dbname="restaurant_db";
+$password="cherylpinto";
+$dbname="restaurant";
 
 $conn=new mysqli($servername,$username,$password,$dbname);
 if($conn->connect_error){
