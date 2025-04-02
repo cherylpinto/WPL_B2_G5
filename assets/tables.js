@@ -1,7 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(window.location.search);
+<<<<<<< HEAD
     const peopleCount = parseInt(params.get("people")) || 1; 
 
+=======
+    const peopleCount = parseInt(params.get("people")) || 1;
+>>>>>>> ec3546f9528c051d183b42f88dbc0ba56f4cc4a2
     const tables = [];
     for (let i = 0; i < 5; i++) {
         tables.push({ id: i + 1, size: 10 });
@@ -9,13 +13,17 @@ document.addEventListener("DOMContentLoaded", () => {
     for (let i = 5; i < 20; i++) {
         tables.push({ id: i + 1, size: 4 });
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> ec3546f9528c051d183b42f88dbc0ba56f4cc4a2
     let reservedTables = JSON.parse(localStorage.getItem("reservedTables")) || [];
     let selectedTable = null;
 
     function renderTables() {
         const tableGrid = document.getElementById('table-grid');
-        tableGrid.innerHTML = ''; 
+        tableGrid.innerHTML = ''; // Clear existing tables
 
         tables.forEach(table => {
             const tableElement = document.createElement('div');

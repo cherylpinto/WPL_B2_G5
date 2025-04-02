@@ -232,7 +232,6 @@ if (!$isAuthenticated) {
             </div>
             <div class="reservation-form">
                 <h2>Reserve a table</h2>
-             
                 <form id="reservation-form">
                     <input type="hidden" id="selectedTable" name="table_id" value="">
                     <input type="hidden"  name="user_id" value="<?php echo $_SESSION['user_id'] ?? ''; ?>">
@@ -271,6 +270,7 @@ if (!$isAuthenticated) {
     const requests = document.getElementById("requests").value;
 
     window.location.href = `book_a_table.php?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&email=${encodeURIComponent(email)}&date=${encodeURIComponent(date)}&time=${encodeURIComponent(time)}&people=${encodeURIComponent(people)}&requests=${encodeURIComponent(requests)}`;
+
 });
 </script>
             </div>

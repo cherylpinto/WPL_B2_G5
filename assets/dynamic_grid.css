@@ -1,3 +1,4 @@
+
 body {
     background: url('../images/image.png') no-repeat center center/cover fixed; 
     background-size: cover;
@@ -46,7 +47,10 @@ body::before {
     color: white;
 }
 
-/* Status-based styles */
+.table.available {
+    background-color: rgba(180, 180, 180, 0.7); 
+}
+
 .table.reserved {
     background-color: rgba(217, 4, 41, 0.8);
     border-color: rgba(183, 28, 28, 0.9);
@@ -55,26 +59,18 @@ body::before {
 }
 
 .table.selected {
-    background-color: #01b159;
+    background-color:#01b159;
     border-color: #019149;
     transform: scale(1.1);
     box-shadow: 0 8px 20px #004422;
 }
 
-.table.disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-    pointer-events: none;
-}
-
-/* Hover effect */
 .table:hover {
     transform: scale(1.1);
     background-color: rgba(255, 255, 255, 0.3);
     box-shadow: 0 5px 15px rgba(255, 255, 255, 0.4);
 }
 
-/* Size-based styles */
 .table.large {
     width: 140px;
     height: 140px;
@@ -92,4 +88,10 @@ body::before {
     transform: scale(1.05);
     background-color: rgba(150, 150, 150, 0.7);
     border-color: rgba(100, 100, 100, 0.8);
+}
+
+.table.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    pointer-events: none;
 }
