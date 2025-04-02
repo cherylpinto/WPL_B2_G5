@@ -265,7 +265,7 @@ if (!$isAuthenticated) {
                             const phone = document.getElementById("phone").value;
                             const people = document.getElementById("people").value;
                     
-                            window.location.href = `book_a_table.html?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&people=${encodeURIComponent(people)}`;
+                            window.location.href = `book_a_table.php?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&people=${encodeURIComponent(people)}`;
                         });
                     </script>
             </div>
