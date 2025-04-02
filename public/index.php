@@ -270,7 +270,7 @@ if (!$isAuthenticated) {
     const people = document.getElementById("people").value;
     const requests = document.getElementById("requests").value;
 
-    window.location.href = `book_a_table.html?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&email=${encodeURIComponent(email)}&date=${encodeURIComponent(date)}&time=${encodeURIComponent(time)}&people=${encodeURIComponent(people)}&requests=${encodeURIComponent(requests)}`;
+    window.location.href = `book_a_table.php?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&email=${encodeURIComponent(email)}&date=${encodeURIComponent(date)}&time=${encodeURIComponent(time)}&people=${encodeURIComponent(people)}&requests=${encodeURIComponent(requests)}`;
 });
 </script>
             </div>

@@ -1,65 +1,95 @@
+body {
+    background: url('../images/image.png') no-repeat center center/cover fixed; 
+    background-size: cover;
+    position: relative;
+    color: white;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); 
+    backdrop-filter: blur(8px);
+    z-index: -1;
+}
+
 #table-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* Create 5 columns */
-    grid-gap: 20px;
+    grid-template-columns: repeat(5, 1fr); 
+    grid-gap: 30px;
     justify-content: center;
-    margin: 20px 0;
+    place-items: center;  
+    grid-auto-flow: row dense; 
+    margin: 50px auto;
+    max-width: 1000px;
 }
 
 .table {
-    width: 100px;
-    height: 100px;
-    background-color: #d3d3d3;
-    border-radius: 100%;
+    width: 110px;
+    height: 110px;
+    background-color: rgba(255, 255, 255, 0.2); 
+    border-radius: 15px;
     text-align: center;
-    /*line-height: 100px;*/
     cursor: pointer;
-    font-size: 10px;
-    transition: 0.3s;
+    font-size: 14px;
+    transition: transform 0.3s ease-in-out, background-color 0.3s, box-shadow 0.3s;
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: bold;
-    /*padding: 10px;
-    word-wrap: break-word;*/
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    color: white;
 }
 
-/* Available tables */
-.table.available {
-    background-color: lightsgray;
-}
-
-/* Reserved tables */
+/* Status-based styles */
 .table.reserved {
-    background-color: lightcoral !important;
+    background-color: rgba(217, 4, 41, 0.8);
+    border-color: rgba(183, 28, 28, 0.9);
     cursor: not-allowed;
+    opacity: 0.8;
 }
 
-/* Selected tables */
 .table.selected {
-    background-color: #d90429 !important;
-}
-
-/*Suggested tables*/
-.table.suggested {
-    border: 3px solid black
-}
-
-
-/* Large tables */
-.table.large {
-    background-color: lightgray;
-    width: 130px;
-    height: 130px;
-    font-size: 13px;
-    transition: 0.3s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-}
-
-.table:hover{
+    background-color: #01b159;
+    border-color: #019149;
     transform: scale(1.1);
-    transition: transform 0.2s;
+    box-shadow: 0 8px 20px #004422;
+}
+
+.table.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Hover effect */
+.table:hover {
+    transform: scale(1.1);
+    background-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.4);
+}
+
+/* Size-based styles */
+.table.large {
+    width: 140px;
+    height: 140px;
+    font-size: 16px;
+    border-radius: 20px;
+}
+
+.table.small {
+    width: 110px;
+    height: 110px;
+    margin: 0 auto;  
+}
+
+.table.large:hover {
+    transform: scale(1.05);
+    background-color: rgba(150, 150, 150, 0.7);
+    border-color: rgba(100, 100, 100, 0.8);
 }

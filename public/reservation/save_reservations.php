@@ -45,7 +45,7 @@ echo "<script>
     let reservedTables = JSON.parse(localStorage.getItem('reservedTables')) || [];
     reservedTables.push(" . $table_id . ");
     localStorage.setItem('reservedTables', JSON.stringify(reservedTables));
-   window.location.href = '/WPL_B2_G5/public/reservation/fetch_reservations.php';
+   window.location.href = 'fetch_reservations.php';
 
 </script>";
 exit();

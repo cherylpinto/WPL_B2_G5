@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(window.location.search);
     const peopleCount = parseInt(params.get("people")) || 1; 
 
-  
     const tables = [];
     for (let i = 0; i < 5; i++) {
         tables.push({ id: i + 1, size: 10 });
@@ -11,7 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
         tables.push({ id: i + 1, size: 4 });
     }
 
-    
     let reservedTables = JSON.parse(localStorage.getItem("reservedTables")) || [];
     let selectedTable = null;
 
@@ -33,8 +31,12 @@ document.addEventListener("DOMContentLoaded", () => {
             if (reservedTables.includes(table.id)) {
                 tableElement.classList.add('reserved');
                 tableElement.innerHTML += '<br>(Reserved)';
-            } else if (peopleCount <= table.size) {
-                tableElement.classList.add('suggested');
+                tableElement.style.pointerEvents = 'none';
+                tableElement.style.opacity = '0.5';
+            } else if (peopleCount > table.size) {
+                tableElement.classList.add('disabled');
+                tableElement.style.pointerEvents = 'none';
+                tableElement.style.opacity = '0.5';
             }
 
             tableElement.addEventListener('click', () => handleTableSelection(table, tableElement));
@@ -53,11 +55,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         tableElement.classList.add("selected");
         selectedTable = table.id;
-        
-        
+
         document.getElementById("selected-table").value = selectedTable;
-        
-        
+
         const reserveButton = document.getElementById("reserve-button");
         reserveButton.disabled = false;
         reserveButton.textContent = `Reserve Table ${selectedTable}`;
@@ -70,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
     });
-
 
     renderTables();
 });
