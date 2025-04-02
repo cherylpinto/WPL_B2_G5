@@ -3,7 +3,7 @@
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', 'cherylpinto');
-define('DB_DATABASE', 'restaurant_db');
+define('DB_DATABASE', 'restaurant');
 
 class Database {
     private $connection;

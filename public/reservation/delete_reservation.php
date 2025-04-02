@@ -1,8 +1,8 @@
 <?php
-include 'connect.php';
+include_once __DIR__ . '/connect.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $id = $_POST['id']; 
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
 
     $sql = "DELETE FROM reservations WHERE id=?";
     $stmt = $conn->prepare($sql);
@@ -10,11 +10,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         echo "Reservation deleted successfully!";
+   
+        header("Location: fetch_reservations.php?deleted=true&id=$id");
+        exit();
     } else {
-        echo "Error deleting reservation: " . $stmt->error;
+        
+        header("Location: fetch_reservations.php?error=true");
+        exit();
     }
 
     $stmt->close();
     $conn->close();
+} else {
+    echo "Reservation ID is required.";
 }
 ?>
