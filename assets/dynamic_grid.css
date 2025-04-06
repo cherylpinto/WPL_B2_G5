@@ -95,3 +95,21 @@ body::before {
     opacity: 0.5;
     pointer-events: none;
 }
+
+.reserve-btn{
+    width: 15%;
+    background: #d32f2f;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-top-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-bottom: 20px;
+}
+
+.reserve-btn:hover {
+    background: #b71c1c;
+}

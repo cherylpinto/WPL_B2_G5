@@ -30,5 +30,5 @@ $tables = [];
 while ($row = $result->fetch_assoc()) {
     $tables[] = $row;
 }
-echo json_encode($tables);
+echo json_encode($tables);      
 ?>

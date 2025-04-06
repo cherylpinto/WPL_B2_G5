@@ -12,10 +12,11 @@ function renderTables(tables) {
     const grid = document.getElementById('table-grid');
     grid.innerHTML = ''; // Clear the previous grid
 
+    const peopleCount = parseInt(document.getElementById('form-people').value, 10);
     tables.forEach(table => {
         // Create a new div element for each table
         const tableElement = document.createElement('div');
-        tableElement.className = `table table-${table.capacity}`; // Class for styling by capacity
+        tableElement.className = `table ${table.capacity == 10 ? 'large' : 'small'}`; // Class for styling by capacity
         tableElement.textContent = `Table ${table.table_id} (${table.capacity})`; // Display table info
         tableElement.dataset.tableId = table.table_id; // Set table ID for access later
         tableElement.dataset.tableSize = table.capacity; // Set table size
@@ -23,7 +24,10 @@ function renderTables(tables) {
         // If the table is reserved, mark it accordingly
         if (table.status === 'reserved') {
             tableElement.classList.add('reserved');
-        } else {
+        } else if (table.capacity < peopleCount) {
+            tableElement.classList.add('disabled');
+        }
+        else {
             // If available, make it selectable and attach event listener
             tableElement.classList.add('available');
             tableElement.addEventListener('click', handleTableSelection);
@@ -67,9 +71,10 @@ function handleTableSelection(event) {
  * @param {string} time - Selected reservation time
  */
 function fetchTables(peopleCount, date, time) {
-    fetch(`reservation/fetch_table.php?date=${date}&time=${time}`)
+    fetch(`./reservation/fetch_table.php?date=${date}&time=${time}`)
         .then(response => response.json())
         .then(data => {
+            console.log("Fetched table data:", data);
             if (data.error) {
                 console.error('Error:', data.error);
                 return;
@@ -93,6 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Ensure all necessary inputs are available before fetching tables
     if (peopleInput && peopleInput.value && dateInput && timeInput) {
+        console.log("Calling fetchTables with:", peopleInput.value, dateInput, timeInput); // add this
         fetchTables(peopleInput.value, dateInput, timeInput);
     } else {
         console.warn("Missing date/time/people info.");
