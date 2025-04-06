@@ -12,7 +12,7 @@ include_once __DIR__ . '/connect.php';
 
 <div class="container">
     <h2>Reservation Details</h2>
-    <table class="table">
+    <table class="table table-bordered table-hover">
         <thead>
             <tr>
                 <th>ID</th>
@@ -22,8 +22,8 @@ include_once __DIR__ . '/connect.php';
                 <th>Date</th>
                 <th>Time</th>
                 <th>People</th>
+                <th>Table No.</th>
                 <th>Requests</th>
-                <th></th>
                 <th>Status</th>
                 <th>Actions</th>
             </tr>
@@ -48,12 +48,9 @@ include_once __DIR__ . '/connect.php';
                 <td><?php echo htmlspecialchars($row['requests']); ?></td>
                 <td><?php echo htmlspecialchars($row['status']); ?></td>
                 <td>
-   
-    <a class="btn btn-danger btn-sm" href="delete_reservation.php?id=<?php echo $row['id']; ?>">Delete</a>
-    <a class="btn btn-primary btn-sm" href="update_reservations.php?id=<?php echo $row['id']; ?>">Edit</a>
-</td>
-
-
+                    <a class="btn btn-danger btn-sm" href="delete_reservation.php?id=<?php echo $row['id']; ?>">Delete</a>
+                    <a class="btn btn-primary btn-sm" href="update_reservations.php?id=<?php echo $row['id']; ?>">Edit</a>
+                </td>
             </tr>
             <?php
                 }

@@ -1,63 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book A Table</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/dynamic_grid.css"> 
-</head>
-<body>
-    <section class="reservation text-center">
-        <h2>Book Your Table</h2>
-        <p>Select a table:</p>
+<?php
+header('Content-Type: application/json');
+include_once __DIR__ . '/reservation/connect.php';
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // POST = update table status (when selected by user)
+    $table_id = $_POST['table_id'] ?? null;
 
-        <div class="container mt-4">
-            <div class="row g-3 justify-content-center" id="table-grid">
+    if (!$table_id) {
+        echo "error: Missing table_id";
+        exit;
+    }
 
-            </div>
-        </div>
+    $stmt = $conn->prepare("UPDATE tables SET status = 'reserved' WHERE table_id = ?");
+    $stmt->bind_param("i", $table_id);
 
-      
-        <div class="reservation-form mt-4">
-            <form id="reservation-form" method="POST" action="../public/reservation/save_reservations.php">
-                <input type="hidden" id="selected-table" name="table_id" value=""> 
-                <input type="hidden" id="form-name" name="name">
-                <input type="hidden" id="form-phone" name="phone">
-                <input type="hidden" id="form-email" name="email">
-                <input type="hidden" id="form-date" name="date">
-                <input type="hidden" id="form-time" name="time">
-                <input type="hidden" id="form-people" name="people">
-                <input type="hidden" id="form-requests" name="requests">
-                <button type="submit" class="reserve-btn" id="reserve-button">Select a Table to Reserve</button>
-            </form>
-            
-        </div>
-    </section>
+    if ($stmt->execute()) {
+        echo "success";
+    } else {
+        echo "error: " . $stmt->error;
+    }
+    $stmt->close();
+    $conn->close();
+    exit;
+}
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-           
-            const params = new URLSearchParams(window.location.search);
-            const name = params.get("name");
-            const phone = params.get("phone");
-            const email = params.get("email");
-            const date = params.get("date");
-            const time = params.get("time");
-            const people = params.get("people");
-            const requests = params.get("requests");
-            
-           
-            document.getElementById("form-name").value = name;
-            document.getElementById("form-phone").value = phone;
-            document.getElementById("form-email").value = email;
-            document.getElementById("form-date").value = date;
-            document.getElementById("form-time").value = time;
-            document.getElementById("form-people").value = people;
-            document.getElementById("form-requests").value = requests;
-        });
-    </script>
-    <script src="../assets/tables.js"></script>
-</body>
-</html>
+// GET = return all tables
+$result = $conn->query("SELECT table_id AS id, capacity AS size, status FROM tables");
+$tables = [];
+
+while ($row = $result->fetch_assoc()) {
+    $tables[] = $row;
+}
+echo json_encode($tables);
+?>
