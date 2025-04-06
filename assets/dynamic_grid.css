@@ -5,6 +5,7 @@ body {
     position: relative;
     color: white;
 }
+
 body::before {
     content: "";
     position: absolute;
@@ -16,6 +17,7 @@ body::before {
     backdrop-filter: blur(8px);
     z-index: -1;
 }
+
 #table-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr); 
