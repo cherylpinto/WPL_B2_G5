@@ -8,10 +8,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($user) {
         $_SESSION['user_id'] = $user['user_id'];
-        $_SESSION['first_name'] = $user['first_name']; // Store first name in session
+        $_SESSION['first_name'] = $user['first_name']; 
         $_SESSION['email'] = $user['email'];
         
-        header("Location: index.php"); // Redirect after login
+        header("Location: index.php"); 
         exit();
     } else {
         $_SESSION['error'] = "Invalid email or password!";
@@ -45,6 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <?php endif; ?>
         <button type="submit">Login</button>
         <p>Don't have an account?<a href="signup.php"> Signup</a></p>
+        <p><a href="../app/views/admin_login.php">Admin Login</a></p>
         </div>
         </div>
     </form>

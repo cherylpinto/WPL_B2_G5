@@ -5,7 +5,7 @@ include_once __DIR__ . '/connect.php';
 $cancel_sql = "UPDATE reservations 
                SET status = 'cancelled' 
                WHERE status = 'pending' 
-               AND CONCAT(date, ' ', time) < NOW() - INTERVAL 1 HOUR";
+                AND TIMESTAMP(date, time) < NOW() - INTERVAL 1 HOUR";
 $conn->query($cancel_sql);
 
 // Release the tables that were cancelled
@@ -33,7 +33,8 @@ $selectedEnd = clone $reservationDateTime;
 $selectedEnd->modify('+1 hour');
 
 // Fetch reservations on the same date with pending status
-$sql = "SELECT table_id, date, time FROM reservations WHERE status = 'pending' AND date = ?";
+$sql = $sql = "SELECT table_id, date, time FROM reservations 
+WHERE status IN ('pending', 'approved') AND date = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $date);
 $stmt->execute();

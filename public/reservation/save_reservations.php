@@ -4,7 +4,7 @@ include_once __DIR__ . '/connect.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name     = $_POST['name'];
-    $phone    = $_POST['phone']; // this was missing!
+    $phone    = $_POST['phone'];
     $email    = $_POST['email'];
     $date     = $_POST['date'];
     $time     = $_POST['time'];
@@ -13,17 +13,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $requests = $_POST['requests'];
     $status   = 'Pending';
 
+    if (!isset($_SESSION['user_id'])) {
+        echo "Error: User not logged in.";
+        exit();
+    }
+
+    $user_id = $_SESSION['user_id'];
+
     if (empty($table_id)) {
         echo "Error: No table selected.";
         exit();
     }
-
-    //  Use the correct variable name here
-    $stmt = $conn->prepare("INSERT INTO reservations (name, phone, email, date, time, people, table_id, requests, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssssiss", $name, $phone, $email, $date, $time, $people, $table_id, $requests, $status);
+    $stmt = $conn->prepare("INSERT INTO reservations (user_id, name, phone, email, date, time, people, table_id, requests, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("issssssiss", $user_id, $name, $phone, $email, $date, $time, $people, $table_id, $requests, $status);
 
     if ($stmt->execute()) {
-        //  Update table status AFTER successful reservation
         $update_table_sql = "UPDATE tables SET status = 'reserved' WHERE table_id = ?";
         $stmt_update_table = $conn->prepare($update_table_sql);
         $stmt_update_table->bind_param("i", $table_id);
@@ -42,4 +46,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
     $conn->close();
 }
+
 ?>

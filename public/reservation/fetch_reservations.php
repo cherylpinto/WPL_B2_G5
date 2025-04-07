@@ -1,6 +1,21 @@
 <?php
+session_start();
 include_once __DIR__ . '/connect.php';
+
+if (!isset($_SESSION['user_id'])) {
+    echo "<p>You must be logged in to view your reservations.</p>";
+    exit;
+}
+
+$userId = $_SESSION['user_id'];
+
+$sql = "SELECT * FROM reservations WHERE user_id = ? ORDER BY date, time";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $userId);
+$stmt->execute();
+$result = $stmt->get_result();
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,9 +45,6 @@ include_once __DIR__ . '/connect.php';
         </thead>
         <tbody>
             <?php
-            $sql = "SELECT * FROM reservations ORDER BY date, time";
-            $result = $conn->query($sql);
-            
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
             ?>
@@ -57,6 +69,8 @@ include_once __DIR__ . '/connect.php';
             } else {
                 echo "<tr><td colspan='11' class='text-center'>No reservations found</td></tr>";
             }
+            $stmt->close();
+            $conn->close();
             ?>
         </tbody>
     </table>
