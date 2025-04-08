@@ -22,15 +22,22 @@ $result = $stmt->get_result();
     <title>Reservation Database</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel='stylesheet' href="../../assets/display.css">
+    <style>
+        .confirmation{
+            margin-bottom:10px ;
+        }
+    </style>
 </head>
 <body>
 
 <div class="container">
     <h2>Reservation Details</h2>
+    <div class="text-left confirmation">
+        <a href="../index.php" class="btn btn-success">🏠 Go to Home</a>
+    </div>
     <table class="table table-bordered table-hover">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Name</th>
                 <th>Phone Number</th>
                 <th>Email</th>
@@ -49,7 +56,6 @@ $result = $stmt->get_result();
                 while ($row = $result->fetch_assoc()) {
             ?>
             <tr>
-                <td><?php echo $row['id']; ?></td>
                 <td><?php echo htmlspecialchars($row['name']); ?></td>
                 <td><?php echo htmlspecialchars($row['phone']); ?></td>
                 <td><?php echo htmlspecialchars($row['email']); ?></td>

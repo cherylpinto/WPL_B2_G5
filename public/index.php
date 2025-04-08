@@ -38,6 +38,7 @@ if (!$isAuthenticated) {
                 <li><a href="#chefs-section">Chefs</a></li>
                 <li><a href="#feedback">Feedback</a></li>
                 <li><a href="#reservation">Reserve a Table</a></li>
+                <li><a href="../public/reservation/fetch_reservations.php">My reservations</a></li>
                 <li><a href="#footer">Contact Us</a></li>
             </ul>
         </nav>
