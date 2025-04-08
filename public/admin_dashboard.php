@@ -15,13 +15,20 @@ $result = $conn->query($query);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="../assets/admin.css">
 </head>
+
 <body>
-    <h1>Admin Dashboard</h1>
+    <div class="admin-header">
+        <h1 class="dashboard-title">Admin Dashboard</h1>
+        <a href="../app/views/admin_logout.php" class="logout-btn">Logout</a>
+    </div>
+
+
     <table border="1" cellpadding="10" cellspacing="0">
         <tr>
             <th>Reservation ID</th>
@@ -65,4 +72,5 @@ $result = $conn->query($query);
         <?php endwhile; ?>
     </table>
 </body>
+
 </html>
