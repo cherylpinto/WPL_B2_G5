@@ -9,7 +9,7 @@ include_once __DIR__ . '/../app/config/database.php';
 $db = new Database();
 $conn = $db->connect();
 
-$query = "SELECT id, name, email, date, time, people, table_id, status FROM reservations";
+$query = "SELECT id, name, email, date, time, people, table_id, status FROM reservations WHERE status = 'pending'";
 $result = $conn->query($query);
 ?>
 
