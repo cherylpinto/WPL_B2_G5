@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $mail->Host = 'smtp.gmail.com';
                     $mail->SMTPAuth = true;
                     $mail->Username = 'aurelias.management@gmail.com';        
-                    $mail->Password = 'qsbb ewob tvgs vnhk';            
+                    $mail->Password = '';            
                     $mail->SMTPSecure = 'tls';
                     $mail->Port = 587;
 
