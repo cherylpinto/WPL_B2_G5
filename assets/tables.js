@@ -16,24 +16,39 @@ function renderTables(tables) {
     tables.forEach(table => {
         // Create a new div element for each table
         const tableElement = document.createElement('div');
-        tableElement.className = `table ${table.capacity == 10 ? 'large' : 'small'}`; // Class for styling by capacity
-        tableElement.textContent = `Table ${table.table_id} (${table.capacity})`; // Display table info
-        tableElement.dataset.tableId = table.table_id; // Set table ID for access later
-        tableElement.dataset.tableSize = table.capacity; // Set table size
+        // Ensure capacity is treated as a number
+        const capacity = parseInt(table.capacity, 10);
+        let sizeClass = 'small';
+
+        if (capacity === 10) {
+            sizeClass = 'xlarge';
+        } else if (capacity === 6) {
+            sizeClass = 'large';
+        } else if (capacity === 4) {
+            sizeClass = 'medium';
+        } else if (capacity === 2) {
+            sizeClass = 'small';
+        }
+
+        // Debug logging: Verify capacity and assigned class
+        console.log(`Rendering Table ${table.table_id} (Capacity: ${capacity}) → Class: ${sizeClass}`);
+
+        tableElement.className = `table ${sizeClass}`;
+        tableElement.textContent = `Table ${table.table_id} (${capacity})`;
+        tableElement.dataset.tableId = table.table_id;
+        tableElement.dataset.tableSize = capacity;
 
         // If the table is reserved, mark it accordingly
         if (table.status === 'reserved') {
             tableElement.classList.add('reserved');
-        } else if (table.capacity < peopleCount) {
+        } else if (capacity < peopleCount) {
             tableElement.classList.add('disabled');
-        }
-        else {
+        } else {
             // If available, make it selectable and attach event listener
             tableElement.classList.add('available');
             tableElement.addEventListener('click', handleTableSelection);
         }
 
-        // Add the table to the grid
         grid.appendChild(tableElement);
     });
 }
@@ -82,15 +97,11 @@ function fetchTables(peopleCount, date, time) {
 
             // Render all tables (reserved or available)
             renderTables(data);
-
-            // OPTIONAL: Filter by capacity if you only want suitable tables
-            // const filteredTables = data.filter(table => table.capacity >= parseInt(peopleCount, 10));
-            // renderTables(filteredTables);
         })
         .catch(error => console.error('Fetch error:', error));
 }
 
-//Initialize the table grid on page load if form data is already filled
+// Initialize the table grid on page load if form data is already filled
 document.addEventListener('DOMContentLoaded', () => {
     const peopleInput = document.getElementById('form-people');
     const dateInput = document.getElementById('form-date')?.value;
@@ -98,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Ensure all necessary inputs are available before fetching tables
     if (peopleInput && peopleInput.value && dateInput && timeInput) {
-        console.log("Calling fetchTables with:", peopleInput.value, dateInput, timeInput); // add this
+        console.log("Calling fetchTables with:", peopleInput.value, dateInput, timeInput);
         fetchTables(peopleInput.value, dateInput, timeInput);
     } else {
         console.warn("Missing date/time/people info.");

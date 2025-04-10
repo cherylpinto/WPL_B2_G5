@@ -5,6 +5,8 @@ use PHPMailer\PHPMailer\Exception;
 require __DIR__ . '/../vendor/autoload.php'; 
 
 include_once __DIR__ . '/../app/config/database.php';
+
+
 $db = new Database();
 $conn = $db->connect();
 
@@ -32,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $mail->Host = 'smtp.gmail.com';
                     $mail->SMTPAuth = true;
                     $mail->Username = 'aurelias.management@gmail.com';        
-                    $mail->Password = '';            
+                    $mail->Password = 'qsbb ewob tvgs vnhk';            
                     $mail->SMTPSecure = 'tls';
                     $mail->Port = 587;
 
