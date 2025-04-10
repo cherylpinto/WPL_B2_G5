@@ -22,6 +22,7 @@ if (isset($_GET['id'])) {
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
 
+
     if ($stmt->execute()) {
        
         $update_table_sql = "UPDATE tables SET status='available' WHERE table_id=?";

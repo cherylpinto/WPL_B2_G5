@@ -21,7 +21,7 @@ $user_id = $_SESSION['user_id'];
     </div>
 
     <div class="reservation-form mt-4">
-      <form id="reservation-form" method="POST" action="reservation/save_reservations.php">
+      <form id="reservation-form" method="POST" action="otp.php">
         <input type="hidden" id="selected-table" name="table_id" value=""> 
         <input type="hidden" id="form-name" name="name">
         <input type="hidden" id="form-phone" name="phone">
@@ -30,7 +30,7 @@ $user_id = $_SESSION['user_id'];
         <input type="hidden" id="form-time" name="time">
         <input type="hidden" id="form-people" name="people">
         <input type="hidden" id="form-requests" name="requests">
-        <button type="submit" class="reserve-btn" id="reserve-button">Select a Table to Reserve</button>
+        <button type="submit" class="reserve-btn" id="reserve-button" name="submit_booking">Reserve and Verify via OTP</button>
       </form>
     </div>
   </section>

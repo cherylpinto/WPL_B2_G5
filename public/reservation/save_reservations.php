@@ -2,41 +2,49 @@
 session_start();
 include_once __DIR__ . '/connect.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name     = $_POST['name'];
-    $phone    = $_POST['phone'];
-    $email    = $_POST['email'];
-    $date     = $_POST['date'];
-    $time     = $_POST['time'];
-    $people   = $_POST['people'];
-    $table_id = $_POST['table_id'];
-    $requests = $_POST['requests'];
-    $status   = 'Pending';
+if (!isset($_SESSION['verified_email']) || !isset($_SESSION['form_data'])) {
+    echo "Error: Session expired or invalid access.";
+    exit();
+}
 
-    if (!isset($_SESSION['user_id'])) {
-        echo "Error: User not logged in.";
-        exit();
-    }
+$form_data = $_SESSION['form_data'];
 
-    $user_id = $_SESSION['user_id'];
+$name     = $form_data['name'];
+$phone    = $form_data['phone'];
+$email    = $_SESSION['verified_email']; // Trust verified email
+$date     = $form_data['date'];
+$time     = $form_data['time'];
+$people   = $form_data['people'];
+$table_id = $form_data['table_id'];
+$requests = $form_data['requests'];
+$status   = 'Pending';
 
-    if (empty($table_id)) {
-        echo "Error: No table selected.";
-        exit();
-    }
+// Optional: If user login exists
+$user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
-    $stmt = $conn->prepare("INSERT INTO reservations (user_id, name, phone, email, date, time, people, table_id, requests, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("issssssiss", $user_id, $name, $phone, $email, $date, $time, $people, $table_id, $requests, $status);
+if (empty($table_id)) {
+    echo "Error: No table selected.";
+    exit();
+}
 
-    if ($stmt->execute()) {
-        $update_table_sql = "UPDATE tables SET status = 'reserved' WHERE table_id = ?";
-        $stmt_update_table = $conn->prepare($update_table_sql);
-        $stmt_update_table->bind_param("i", $table_id);
-        $stmt_update_table->execute();
-        $stmt_update_table->close();
+// Prepare and execute insert
+$stmt = $conn->prepare("INSERT INTO reservations (user_id, name, phone, email, date, time, people, table_id, requests, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt->bind_param("issssssiss", $user_id, $name, $phone, $email, $date, $time, $people, $table_id, $requests, $status);
 
-        // Show confirmation screen
-?>
+if ($stmt->execute()) {
+    // Mark the table as reserved
+    $update_table_sql = "UPDATE tables SET status = 'reserved' WHERE table_id = ?";
+    $stmt_update = $conn->prepare($update_table_sql);
+    $stmt_update->bind_param("i", $table_id);
+    $stmt_update->execute();
+    $stmt_update->close();
+
+  
+
+    unset($_SESSION['verified_email']);
+    unset($_SESSION['form_data']);
+
+ ?>
         <!DOCTYPE html>
         <html lang="en">
 
@@ -111,5 +119,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $stmt->close();
     $conn->close();
-}
+
 ?>
