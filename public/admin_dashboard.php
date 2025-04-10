@@ -42,34 +42,40 @@ $result = $conn->query($query);
             <th>Action</th>
         </tr>
 
-        <?php while ($row = $result->fetch_assoc()): ?>
+        <?php if ($result->num_rows > 0): ?>
+            <?php while ($row = $result->fetch_assoc()): ?>
+                <tr>
+                    <td><?= $row['id'] ?></td>
+                    <td><?= $row['name'] ?></td>
+                    <td><?= $row['email'] ?></td>
+                    <td><?= $row['date'] ?></td>
+                    <td><?= $row['time'] ?></td>
+                    <td><?= $row['people'] ?></td>
+                    <td><?= $row['table_id'] ?></td>
+                    <td><?= $row['status'] ?></td>
+                    <td>
+                        <?php if (strtolower($row['status']) === 'pending'): ?>
+                            <form method="POST" action="update_status.php" style="display:inline-block;">
+                                <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                                <input type="hidden" name="new_status" value="approved">
+                                <button type="submit">Approve</button>
+                            </form>
+                            <form method="POST" action="update_status.php" style="display:inline-block;">
+                                <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                                <input type="hidden" name="new_status" value="cancelled">
+                                <button type="submit" style="background-color: #e74c3c; color: white;">Disapprove</button>
+                            </form>
+                        <?php else: ?>
+                            <?= ucfirst($row['status']) ?>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+            <?php endwhile; ?>
+        <?php else: ?>
             <tr>
-                <td><?= $row['id'] ?></td>
-                <td><?= $row['name'] ?></td>
-                <td><?= $row['email'] ?></td>
-                <td><?= $row['date'] ?></td>
-                <td><?= $row['time'] ?></td>
-                <td><?= $row['people'] ?></td>
-                <td><?= $row['table_id'] ?></td>
-                <td><?= $row['status'] ?></td>
-                <td>
-                    <?php if (strtolower($row['status']) === 'pending'): ?>
-                        <form method="POST" action="update_status.php" style="display:inline-block;">
-                            <input type="hidden" name="id" value="<?= $row['id'] ?>">
-                            <input type="hidden" name="new_status" value="approved">
-                            <button type="submit">Approve</button>
-                        </form>
-                        <form method="POST" action="update_status.php" style="display:inline-block;">
-                            <input type="hidden" name="id" value="<?= $row['id'] ?>">
-                            <input type="hidden" name="new_status" value="cancelled">
-                            <button type="submit" style="background-color: #e74c3c; color: white;">Disapprove</button>
-                        </form>
-                    <?php else: ?>
-                        <?= ucfirst($row['status']) ?>
-                    <?php endif; ?>
-                </td>
+                <td colspan="9" style="text-align:center;">No reservations pending</td>
             </tr>
-        <?php endwhile; ?>
+        <?php endif; ?>
     </table>
 </body>
 

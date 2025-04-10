@@ -4,7 +4,7 @@ require __DIR__ . '/../vendor/autoload.php';   // PHPMailer autoloader
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-$conn = new mysqli("localhost", "root", "", "restaurant_db");
+$conn = new mysqli("localhost", "root", "cherylpinto", "restaurant_db");
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
