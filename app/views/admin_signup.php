@@ -15,7 +15,7 @@
         align-items: center;
         position: relative;
         overflow: hidden;
-        background-color: #000; /* fallback for image */
+        background-color: #000; 
     }
 
     body::before {

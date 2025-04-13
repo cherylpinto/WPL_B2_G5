@@ -1,11 +1,9 @@
 <?php
 session_start();
-$isAuthenticated = isset($_SESSION['user_id']); // Check authentication
+$isAuthenticated = isset($_SESSION['user_id']); 
 
 $firstName = isset($_SESSION['first_name']) ? $_SESSION['first_name'] : '';
-$initial = !empty($firstName) ? strtoupper($firstName[0]) : ''; // Get first letter of first name
-
-// Check if user is authenticated before displaying the menu
+$initial = !empty($firstName) ? strtoupper($firstName[0]) : ''; 
 if (!$isAuthenticated) {
     header("Location: login.php");
     exit();

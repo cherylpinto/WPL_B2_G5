@@ -9,7 +9,6 @@ class AuthController {
         $this->userModel = new UserModel();
     }
 
-    // Sign Up method
     public function signUp($first_name, $last_name, $email, $password) {
         if ($this->userModel->emailExists($email)) {
             return "Email already registered!";
@@ -22,28 +21,25 @@ class AuthController {
         }
     }
 
-    // Login method
     public function login($email, $password) {
         $user_id = $this->userModel->authenticateUser($email, $password);
         if ($user_id) {
-            $_SESSION['user'] = $user_id; // Store session
-            return true; // Authentication successful
+            $_SESSION['user'] = $user_id; 
+            return true; 
         } else {
-            return false; // Invalid credentials
+            return false;
         }
     }
 
     public function getUserDetails($email, $password) {
-        // Fetch user details from the model
         $user = $this->userModel->getUserByEmail($email);
 
         if ($user && password_verify($password, $user['password'])) {
-            return $user; // Return full user details
+            return $user;
         }
-        return false; // Authentication failed
+        return false;
     }
     
-    // Logout method
     public function logout() {
         session_start();
         session_unset();

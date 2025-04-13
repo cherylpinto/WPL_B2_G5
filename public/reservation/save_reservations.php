@@ -11,7 +11,7 @@ $form_data = $_SESSION['form_data'];
 
 $name     = $form_data['name'];
 $phone    = $form_data['phone'];
-$email    = $_SESSION['verified_email']; // Trust verified email
+$email    = $_SESSION['verified_email']; 
 $date     = $form_data['date'];
 $time     = $form_data['time'];
 $people   = $form_data['people'];
@@ -19,7 +19,7 @@ $table_id = $form_data['table_id'];
 $requests = $form_data['requests'];
 $status   = 'Pending';
 
-// Optional: If user login exists
+
 $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
 if (empty($table_id)) {
@@ -27,12 +27,10 @@ if (empty($table_id)) {
     exit();
 }
 
-// Prepare and execute insert
 $stmt = $conn->prepare("INSERT INTO reservations (user_id, name, phone, email, date, time, people, table_id, requests, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 $stmt->bind_param("issssssiss", $user_id, $name, $phone, $email, $date, $time, $people, $table_id, $requests, $status);
 
 if ($stmt->execute()) {
-    // Mark the table as reserved
     $update_table_sql = "UPDATE tables SET status = 'reserved' WHERE table_id = ?";
     $stmt_update = $conn->prepare($update_table_sql);
     $stmt_update->bind_param("i", $table_id);

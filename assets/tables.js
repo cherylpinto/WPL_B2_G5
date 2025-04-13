@@ -1,7 +1,4 @@
-// Store the currently selected table's ID
 let selectedTable = null;
-
-// Retrieve reserved tables from localStorage or initialize an empty array
 let reservedTables = JSON.parse(localStorage.getItem('reservedTables')) || [];
 
 /**
@@ -10,13 +7,11 @@ let reservedTables = JSON.parse(localStorage.getItem('reservedTables')) || [];
  */
 function renderTables(tables) {
     const grid = document.getElementById('table-grid');
-    grid.innerHTML = ''; // Clear the previous grid
+    grid.innerHTML = ''; 
 
     const peopleCount = parseInt(document.getElementById('form-people').value, 10);
     tables.forEach(table => {
-        // Create a new div element for each table
         const tableElement = document.createElement('div');
-        // Ensure capacity is treated as a number
         const capacity = parseInt(table.capacity, 10);
         let sizeClass = 'small';
 
@@ -29,8 +24,6 @@ function renderTables(tables) {
         } else if (capacity === 2) {
             sizeClass = 'small';
         }
-
-        // Debug logging: Verify capacity and assigned class
         console.log(`Rendering Table ${table.table_id} (Capacity: ${capacity}) → Class: ${sizeClass}`);
 
         tableElement.className = `table ${sizeClass}`;
@@ -38,13 +31,11 @@ function renderTables(tables) {
         tableElement.dataset.tableId = table.table_id;
         tableElement.dataset.tableSize = capacity;
 
-        // If the table is reserved, mark it accordingly
         if (table.status === 'reserved') {
             tableElement.classList.add('reserved');
         } else if (capacity < peopleCount) {
             tableElement.classList.add('disabled');
         } else {
-            // If available, make it selectable and attach event listener
             tableElement.classList.add('available');
             tableElement.addEventListener('click', handleTableSelection);
         }
@@ -58,24 +49,16 @@ function renderTables(tables) {
  * @param {Event} event - Click event on a table element
  */
 function handleTableSelection(event) {
-    const clickedTable = event.currentTarget; // Get the clicked table
+    const clickedTable = event.currentTarget; 
     const tableId = clickedTable.dataset.tableId;
     const tableSize = clickedTable.dataset.tableSize;
-
-    // Remove 'selected' class from any previously selected table
     const previousSelected = document.querySelector('.table.selected');
     if (previousSelected) {
         previousSelected.classList.remove('selected');
     }
-
-    // Mark this table as selected
     clickedTable.classList.add('selected');
-    selectedTable = tableId; // Update global selectedTable variable
-
-    // Update hidden input field with the selected table ID (for form submission)
+    selectedTable = tableId; 
     document.getElementById('selected-table').value = tableId;
-
-    // Log selected table info for debugging
     console.log(`Selected Table ID: ${tableId}, Size: ${tableSize}`);
 }
 
@@ -94,20 +77,16 @@ function fetchTables(peopleCount, date, time) {
                 console.error('Error:', data.error);
                 return;
             }
-
-            // Render all tables (reserved or available)
             renderTables(data);
         })
         .catch(error => console.error('Fetch error:', error));
 }
 
-// Initialize the table grid on page load if form data is already filled
 document.addEventListener('DOMContentLoaded', () => {
     const peopleInput = document.getElementById('form-people');
     const dateInput = document.getElementById('form-date')?.value;
     const timeInput = document.getElementById('form-time')?.value;
 
-    // Ensure all necessary inputs are available before fetching tables
     if (peopleInput && peopleInput.value && dateInput && timeInput) {
         console.log("Calling fetchTables with:", peopleInput.value, dateInput, timeInput);
         fetchTables(peopleInput.value, dateInput, timeInput);

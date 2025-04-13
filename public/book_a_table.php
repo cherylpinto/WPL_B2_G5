@@ -2,7 +2,6 @@
 header('Content-Type: application/json');
 include_once __DIR__ . '/reservation/connect.php';
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // POST = update table status (when selected by user)
     $table_id = $_POST['table_id'] ?? null;
 
     if (!$table_id) {
@@ -23,7 +22,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     exit;
 }
 
-// GET = return all tables
 $result = $conn->query("SELECT table_id AS id, capacity AS size, status FROM tables");
 $tables = [];
 

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require __DIR__ . '/../vendor/autoload.php';   // PHPMailer autoloader
+require __DIR__ . '/../vendor/autoload.php';  
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -13,17 +13,17 @@ date_default_timezone_set('Asia/Kolkata');
 $success = 0;
 $error_message = "";
 
-// Handle form submission and save reservation details in session
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_booking'])) {
     $_SESSION['form_data'] = $_POST;
+    $_SESSION['email'] = $_POST['email'];
+    unset($_SESSION['otp_sent']); 
 }
 
-// Send OTP
-if (isset($_POST["submit_email"])) {
-    $email = $_POST["email"];
+if (isset($_SESSION['email'])&& !isset($_SESSION['otp_sent'])) {
+    $email = $_SESSION["email"];
     $otp = rand(100000, 999999);
 
-    // Store OTP in database
+
     $stmt = $conn->prepare("INSERT INTO otp_expiry (email, otp, is_expired, create_at) VALUES (?, ?, 0, NOW())");
     $stmt->bind_param("ss", $email, $otp);
     $stmt->execute();
@@ -35,32 +35,32 @@ if (isset($_POST["submit_email"])) {
     //$mail->Timeout = 10; // Prevent infinite wait
 
     try {
-        // Server settings
         $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com'; // or your SMTP server
+        $mail->Host = 'smtp.gmail.com'; 
         $mail->SMTPAuth = true;
-        $mail->Username = 'aurelias.management@gmail.com'; // your email
-        $mail->Password = 'qsbb ewob tvgs vnhk'; // app password
+        $mail->Username = 'aurelias.management@gmail.com'; 
+        $mail->Password = 'qsbb ewob tvgs vnhk'; 
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
 
-        // Recipients
         $mail->setFrom('aurelias.management@gmail.com', 'Aurelias');
         $mail->addAddress($email);
 
-        // Content
         $mail->isHTML(true);
         $mail->Subject = 'Your OTP Code';
         $mail->Body    = "<p>Your OTP is <strong>$otp</strong>. It is valid for 24 hours.</p>";
 
         $mail->send();
-        $success = 1; // show OTP input
+        $_SESSION['otp_sent'] = true;
+        $success = 1; 
     } catch (Exception $e) {
         $error_message = "OTP could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
 }
+else if (isset($_SESSION['otp_sent'])) {
+    $success = 1; 
+}
 
-// Verify OTP
 if (isset($_POST["submit_otp"])) {
     $otp = $_POST["otp"];
 
@@ -74,7 +74,6 @@ if (isset($_POST["submit_otp"])) {
         $row = $result->fetch_assoc();
         $_SESSION['verified_email'] = $row['email'];
 
-        // Expire OTP
         $expireStmt = $conn->prepare("UPDATE otp_expiry SET is_expired = 1 WHERE otp = ?");
         $expireStmt->bind_param("s", $otp);
         $expireStmt->execute();
@@ -89,7 +88,6 @@ if (isset($_POST["submit_otp"])) {
 $conn->close();
 ?>
 
-<!-- HTML -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -108,12 +106,6 @@ $conn->close();
                 <form method="post" action="">
                     <input type="text" name="otp" class="form-control mb-3" placeholder="Enter OTP" required>
                     <button type="submit" name="submit_otp" class="btn btn-success">Verify</button>
-                </form>
-            <?php } else { ?>
-                <h4 class="mb-3">Verify Your Email</h4>
-                <form method="post" action="">
-                    <input type="email" name="email" class="form-control mb-3" placeholder="Enter Email" required>
-                    <button type="submit" name="submit_email" class="btn btn-primary">Send OTP</button>
                 </form>
             <?php } ?>
         </div>

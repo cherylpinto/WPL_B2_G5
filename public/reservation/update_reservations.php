@@ -2,15 +2,12 @@
 include_once __DIR__ . '/connect.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
-    // Fetch reservation details based on the passed reservation ID
     $id = $_GET['id'];
     $sql = "SELECT * FROM reservations WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $result = $stmt->get_result();
-    
-    // Check if a reservation is found
     if ($result->num_rows > 0) {
         $reservation = $result->fetch_assoc();
     } else {
@@ -19,9 +16,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
     }
     $stmt->close();
 } elseif ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Update reservation details when the form is submitted
-
-    // Get the form values
     $id = $_POST['id'] ?? null;
     $name = $_POST['name'] ?? '';
     $phone = $_POST['phone'] ?? '';
@@ -32,17 +26,14 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
     $requests = $_POST['requests'] ?? '';
     $status = $_POST['status'] ?? 'pending';
 
-    // Check if the ID is provided
     if (!$id) {
         die("No reservation ID provided.");
     }
 
-    // Prepare SQL query to update the reservation
     $sql = "UPDATE reservations SET 
             name=?, phone=?, email=?, date=?, time=?, people=?, requests=?, status=? 
             WHERE id=?";
 
-    // Prepare and bind the parameters
     $stmt = $conn->prepare($sql);
     if ($stmt === false) {
         die("Error preparing statement: " . $conn->error);
@@ -50,16 +41,14 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
 
     $stmt->bind_param("ssssisssi", $name, $phone, $email, $date, $time, $people, $requests, $status, $id);
 
-    // Execute the query
     if ($stmt->execute()) {
         echo "Reservation updated successfully!";
-        header("Location: fetch_reservations.php"); // Redirect to the reservations page after updating
+        header("Location: fetch_reservations.php"); 
         exit();
     } else {
         echo "Error updating reservation: " . $stmt->error;
     }
 
-    // Close statement and connection
     $stmt->close();
     $conn->close();
 }
@@ -77,10 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
 
 <div class="container">
     <h2>Update Reservation</h2>
-
-    <!-- Form to update reservation -->
     <form method="POST" action="update_reservations.php">
-        <!-- Hidden input for ID -->
         <input type="hidden" name="id" value="<?php echo $reservation['id']; ?>">
 
         <div class="form-group">

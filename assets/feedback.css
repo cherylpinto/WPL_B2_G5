@@ -13,21 +13,19 @@
     font-style: italic;
 }
 
-/* Scrolling Container */
 .testimonial-slider {
     display: flex;
     gap: 30px;
     overflow-x: auto;
     scroll-behavior: smooth;
     padding-bottom: 10px;
-    scrollbar-width: none; /* Hide scrollbar */
+    scrollbar-width: none; 
 }
 
 .testimonial-slider::-webkit-scrollbar {
-    display: none; /* Hide scrollbar in WebKit browsers */
+    display: none; 
 }
 
-/* Individual Testimonial Card */
 .testimonial-card {
     flex: 0 0 300px;
     background: white;
@@ -65,7 +63,6 @@
     color: #888;
 }
 
-/* Navigation Buttons */
 .slider-btn {
     position: absolute;
     top: 60%;

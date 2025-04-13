@@ -8,11 +8,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($message === "User registered successfully!") {
         $_SESSION['success'] = $message;
-        header("Location: login.php"); // Redirect to login page
+        header("Location: login.php");
         exit();
     } else {
         $_SESSION['error'] = $message;
-        header("Location: signup.php"); // Stay on signup page
+        header("Location: signup.php");
         exit();
     }
 }
