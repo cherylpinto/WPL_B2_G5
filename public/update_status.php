@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $mail->setFrom('aurelias.management@gmail.com', 'Aurelias Restaurant Team');
                     $mail->addAddress($reservation['email'], $reservation['name']);
                     $mail->isHTML(true);
-                    $mail->Subject = 'Your Table Reservation is Approved';
+                    $mail->Subject = 'Your Table Reservation has been Approved';
                     $mail->Body = "
                         <h3>Hello {$reservation['name']},</h3>
                         <p>Your table reservation has been <strong>approved ✅</strong>.</p>
@@ -50,6 +50,35 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         <p><strong>People:</strong> {$reservation['people']}</p>
                         <p><strong>Table:</strong> {$reservation['table_id']}</p>
                         <p>We look forward to serving you!</p>
+                        <p><strong>- The Restaurant Team</strong></p>
+                    ";
+
+                    $mail->send();
+                } catch (Exception $e) {
+                    error_log("Mail Error: " . $mail->ErrorInfo);
+                }
+            } else if($result->num_rows === 1 && strtolower($new_status) === 'cancelled') {
+                $reservation = $result->fetch_assoc();
+
+                $mail = new PHPMailer(true);
+                try {
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com';
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'aurelias.management@gmail.com';        
+                    $mail->Password = 'qsbb ewob tvgs vnhk';            
+                    $mail->SMTPSecure = 'tls';
+                    $mail->Port = 587;
+
+                    $mail->setFrom('aurelias.management@gmail.com', 'Aurelias Restaurant Team');
+                    $mail->addAddress($reservation['email'], $reservation['name']);
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Your Table Reservation has been Cancelled';
+                    $mail->Body = "
+                        <h3>Hello {$reservation['name']},</h3>
+                        <p>We are sorry to inform you that your table reservation has been <strong>cancelled ❌</strong>.</p>
+                        <p>We cannot accomodate your reservation for the Date: {$reservation['date']}.</p>
+                        <p>We look forward to serving you at a later date, soon!</p>
                         <p><strong>- The Restaurant Team</strong></p>
                     ";
 
