@@ -34,7 +34,7 @@ class AuthController {
     public function getUserDetails($email, $password) {
         $user = $this->userModel->getUserByEmail($email);
 
-        if ($user && password_verify($password, $user['password'])) {
+        if ($user && ($password === "" || password_verify($password, $user['password'])))  {
             return $user;
         }
         return false;

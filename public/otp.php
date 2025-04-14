@@ -93,10 +93,36 @@ $conn->close();
 <head>
     <title>OTP Verification</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .background-image {
+            background-image: url('../images/display.png'); 
+            background-size: cover;
+            background-position: center;
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            filter: blur(8px);
+            z-index: -1;
+        }
+        .otp-container {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+        }
+    </style>
 </head>
 <body class="bg-light">
-    <div class="container mt-5">
-        <div class="col-md-6 offset-md-3 bg-white p-4 rounded shadow">
+<div class="background-image"></div>
+    <div class="container mt-5" style="align-items: center">
+        <div class="col-md-6 offset-md-3 bg-white p-4 rounded shadow otp-container">
             <?php if (!empty($error_message)) { ?>
                 <div class="alert alert-danger"><?php echo $error_message; ?></div>
             <?php } ?>
