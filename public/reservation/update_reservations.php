@@ -105,15 +105,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
         </div>
 
         <div class="form-group">
-            <label for="status">Status:</label>
-            <select id="status" name="status" class="form-control">
-                <option value="pending" <?php echo ($reservation['status'] == 'pending') ? 'selected' : ''; ?>>Pending</option>
-                <option value="confirmed" <?php echo ($reservation['status'] == 'confirmed') ? 'selected' : ''; ?>>Confirmed</option>
-                <option value="cancelled" <?php echo ($reservation['status'] == 'cancelled') ? 'selected' : ''; ?>>Cancelled</option>
-            </select>
-        </div>
-
-        <div class="form-group">
             <button type="submit" class="btn btn-primary">Update Reservation</button>
         </div>
     </form>
