@@ -7,6 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
     $stmt->execute();
+    
     $result = $stmt->get_result();
     if ($result->num_rows > 0) {
         $reservation = $result->fetch_assoc();
@@ -21,10 +22,13 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
     $phone = $_POST['phone'] ?? '';
     $email = $_POST['email'] ?? '';
     $date = $_POST['date'] ?? '';
-    $time = $_POST['time'] ?? '';
+    $input_time = $_POST['time'] ?? '00:00'; 
+    $time_parts = explode(':', $input_time);
+    $time = sprintf('%02d:%02d:00', (int)$time_parts[0], (int)$time_parts[1]); 
+    
     $people = $_POST['people'] ?? 1;
     $requests = $_POST['requests'] ?? '';
-    $status = $_POST['status'] ?? 'pending';
+    $status = $_POST['status'] ?? 'Pending';
 
     if (!$id) {
         die("No reservation ID provided.");
@@ -39,10 +43,12 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
         die("Error preparing statement: " . $conn->error);
     }
 
-    $stmt->bind_param("ssssisssi", $name, $phone, $email, $date, $time, $people, $requests, $status, $id);
+    $stmt->bind_param("sssssissi", $name, $phone, $email, $date, $time, $people, $requests, $status, $id);
+    
 
     if ($stmt->execute()) {
-        echo "Reservation updated successfully!";
+        //echo "<p>DEBUG: Time being saved → <strong>$time</strong></p>";
+        //echo "Reservation updated successfully!";
         header("Location: fetch_reservations.php"); 
         exit();
     } else {
@@ -91,7 +97,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
 
         <div class="form-group">
             <label for="time">Time:</label>
-            <input type="time" id="time" name="time" value="<?php echo htmlspecialchars($reservation['time']); ?>" class="form-control" required>
+            <input type="time" id="time" name="time" value="<?php echo htmlspecialchars(substr($reservation['time'], 0, 5)); ?>" class="form-control" required>
+
         </div>
 
         <div class="form-group">
