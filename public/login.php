@@ -1,7 +1,6 @@
 <?php
 session_start();
 include_once '../app/controllers/AuthController.php';
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $authController = new AuthController();
     $user = $authController->getUserDetails($_POST['email'], $_POST['password']);
@@ -42,10 +41,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="error-message">
                     <?php echo $_SESSION['error']; unset($_SESSION['error']); ?>
                 </div>
-        <?php endif; ?>
-        <button type="submit">Login</button>
-        <p>Don't have an account?<a href="signup.php"> Signup</a></p>
-        <p><a href="../app/views/admin_login.php">Admin Login</a></p>
+            <?php endif; ?>
+            <button type="submit">Login</button>
+            <p>Don't have an account?<a href="signup.php"> Signup</a></p>
+            <p><a href="../app/views/admin_login.php">Admin Login</a></p>
         </div>
         </div>
     </form>
