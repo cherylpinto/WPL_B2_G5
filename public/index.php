@@ -225,57 +225,113 @@ if (!$isAuthenticated) {
     </section>
 
     <section class="reservation" id="reservation">
-        <div class="reservation-container">
-            <div class="reservation-image">
-                <img src="../images/reservation.png" alt="Restaurant Interior">
-            </div>
-            <div class="reservation-form">
-                <h2>Reserve a table</h2>
-                <form id="reservation-form">
-                    <input type="hidden" id="selectedTable" name="table_id" value="">
-                    <input type="hidden"  name="user_id" value="<?php echo $_SESSION['user_id'] ?? ''; ?>">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
-
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" placeholder="Enter your number" required>
-
-                    <label for="email">Email ID</label>
-                    <input type="email" id="email" name="email" placeholder="Enter your email id" required>
-
-                    <label for="date">Date</label>
-                    <input type="date" id="date" name="date" required>
-
-                    <label for="time">Time</label>
-                    <input type="time" id="time" name="time" required>
-
-                    <label for="people">Number of people</label>
-                    <input type="number" id="people" name="people" placeholder="Number of people" required min="1" max="10">
-                    <label for="requests">Special Requests</label>
-                    <textarea id="requests" name="requests" placeholder="Any special requests..."></textarea>
-
-                    <button type="submit" class="btn-reserve">Reserve</button>
-                </form>
-                <script>
-                document.getElementById("reservation-form").addEventListener("submit", function(event) {
-    event.preventDefault(); 
-
-    const name = document.getElementById("name").value;
-    const phone = document.getElementById("phone").value;
-    const email = document.getElementById("email").value;
-    const date = document.getElementById("date").value;
-    const time = document.getElementById("time").value;
-    const people = document.getElementById("people").value;
-    const requests = document.getElementById("requests").value;
-
-    window.location.href = `book_page.php?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&email=${encodeURIComponent(email)}&date=${encodeURIComponent(date)}&time=${encodeURIComponent(time)}&people=${encodeURIComponent(people)}&requests=${encodeURIComponent(requests)}`;
-
-
-});
-</script>
-            </div>
+    <div class="reservation-container">
+        <div class="reservation-image">
+            <img src="../images/reservation.png" alt="Restaurant Interior">
         </div>
-    </section>
+        <div class="reservation-form">
+            <h2>Reserve a table</h2>
+            <form id="reservation-form">
+                <input type="hidden" id="selectedTable" name="table_id" value="">
+                <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'] ?? ''; ?>">
+
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="Enter your number" required>
+
+                <label for="email">Email ID</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email id" required>
+
+                <label for="date">Date</label>
+                <input type="date" id="date" name="date" required>
+
+                <label for="time">Time</label>
+                <input type="time" id="time" name="time" required>
+
+                <label for="people">Number of people</label>
+                <input type="number" id="people" name="people" placeholder="Number of people" required min="1" max="10">
+
+                <label for="requests">Special Requests</label>
+                <textarea id="requests" name="requests" placeholder="Any special requests..."></textarea>
+
+                <button type="submit" class="btn-reserve">Reserve</button>
+            </form>
+
+            <script>
+                const dateInput = document.getElementById("date");
+                const timeInput = document.getElementById("time");
+                const form = document.getElementById("reservation-form");
+
+                const now = new Date();
+                const todayStr = now.toISOString().split('T')[0];
+                const maxDate = new Date();
+                maxDate.setDate(now.getDate() + 30);
+                const maxDateStr = maxDate.toISOString().split('T')[0];
+
+                dateInput.min = todayStr;
+                dateInput.max = maxDateStr;
+
+                let currentMinTime = "00:00";
+                let currentMaxTime = "23:59";
+
+                dateInput.addEventListener('change', function () {
+                    const selectedDate = new Date(this.value);
+                    const selectedDateStr = this.value;
+                    const day = selectedDate.getDay();
+
+                    let minTime, maxTime;
+
+                    switch (day) {
+                        case 0:
+                            minTime = '12:00';
+                            maxTime = '23:59';
+                            break;
+                        case 6:
+                            minTime = '08:00';
+                            maxTime = '23:00';
+                            break;
+                        default:
+                            minTime = '08:00';
+                            maxTime = '21:00';
+                    }
+
+                    if (selectedDateStr === todayStr) {
+                        const nowHours = now.getHours().toString().padStart(2, '0');
+                        const nowMinutes = now.getMinutes().toString().padStart(2, '0');
+                        const currentTime = `${nowHours}:${nowMinutes}`;
+                        minTime = currentTime > minTime ? currentTime : minTime;
+                    }
+
+                    currentMinTime = minTime;
+                    currentMaxTime = maxTime;
+                });
+
+                form.addEventListener("submit", function (event) {
+                    event.preventDefault();
+
+                    const name = document.getElementById("name").value;
+                    const phone = document.getElementById("phone").value;
+                    const email = document.getElementById("email").value;
+                    const date = document.getElementById("date").value;
+                    const time = document.getElementById("time").value;
+                    const people = document.getElementById("people").value;
+                    const requests = document.getElementById("requests").value;
+
+                    if (time < currentMinTime || time > currentMaxTime) {
+                        alert(`⛔ Please select a time between ${currentMinTime} and ${currentMaxTime}.`);
+                        return;
+                    }
+
+                    window.location.href = `book_page.php?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&email=${encodeURIComponent(email)}&date=${encodeURIComponent(date)}&time=${encodeURIComponent(time)}&people=${encodeURIComponent(people)}&requests=${encodeURIComponent(requests)}`;
+                });
+            </script>
+        </div>
+    </div>
+</section>
+
+
     <footer>
         <div class="footer-container" id="footer">
             <div class="footer-logo">

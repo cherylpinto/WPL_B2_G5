@@ -1,12 +1,6 @@
 <?php
 session_start();
 include_once '../app/controllers/AuthController.php';
-include_once '../app/controllers/GoogleAuthController.php';
-if (isset($_GET['code'])) {
-    $googleAuth = new GoogleAuthController();
-    $googleAuth->handleCallback();
-    exit();
-}
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $authController = new AuthController();
     $user = $authController->getUserDetails($_POST['email'], $_POST['password']);
@@ -23,8 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 }
-$googleAuth = new GoogleAuthController();
-$google_login_url = $googleAuth->getAuthUrl();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,12 +45,6 @@ $google_login_url = $googleAuth->getAuthUrl();
                 </div>
             <?php endif; ?>
             <button type="submit">Login</button>
-            <div style="text-align:center; margin-top: 10px;">
-                <a href="<?php echo $google_login_url; ?>">
-                    <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png"
-                        alt="Google Login" style="height: 50px;width:200px;margin-top: 10px"; />
-                </a>
-            </div>
             <p>Don't have an account?<a href="signup.php"> Signup</a></p>
             <p><a href="../app/views/admin_login.php">Admin Login</a></p>
         </div>

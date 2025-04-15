@@ -7,33 +7,42 @@ let reservedTables = JSON.parse(localStorage.getItem('reservedTables')) || [];
  */
 function renderTables(tables) {
     const grid = document.getElementById('table-grid');
-    grid.innerHTML = ''; 
+    grid.innerHTML = '';
 
     const peopleCount = parseInt(document.getElementById('form-people').value, 10);
+    const capacityGroups = {};
+    tables.forEach(table => {
+        const capacity = parseInt(table.capacity, 10);
+        if (table.status !== 'reserved' && capacity >= peopleCount) {
+            if (!capacityGroups[capacity]) {
+                capacityGroups[capacity] = [];
+            }
+            capacityGroups[capacity].push(table);
+        }
+    });
+    const sortedCapacities = Object.keys(capacityGroups).map(Number).sort((a, b) => a - b);
+    const optimalCapacity = sortedCapacities.find(cap => capacityGroups[cap].length > 0) || null;
+
     tables.forEach(table => {
         const tableElement = document.createElement('div');
         const capacity = parseInt(table.capacity, 10);
         let sizeClass = 'small';
-
-        if (capacity === 10) {
-            sizeClass = 'xlarge';
-        } else if (capacity === 6) {
-            sizeClass = 'large';
-        } else if (capacity === 4) {
-            sizeClass = 'medium';
-        } else if (capacity === 2) {
-            sizeClass = 'small';
-        }
-        console.log(`Rendering Table ${table.table_id} (Capacity: ${capacity}) → Class: ${sizeClass}`);
+        if (capacity === 10) sizeClass = 'xlarge';
+        else if (capacity === 6) sizeClass = 'large';
+        else if (capacity === 4) sizeClass = 'medium';
 
         tableElement.className = `table ${sizeClass}`;
         tableElement.textContent = `Table ${table.table_id} (${capacity})`;
         tableElement.dataset.tableId = table.table_id;
         tableElement.dataset.tableSize = capacity;
 
-        if (table.status === 'reserved') {
+        const isReserved = table.status === 'reserved';
+        const isTooSmall = capacity < peopleCount;
+        const isNotOptimal = capacity !== optimalCapacity;
+
+        if (isReserved) {
             tableElement.classList.add('reserved');
-        } else if (capacity < peopleCount) {
+        } else if (isTooSmall || isNotOptimal) {
             tableElement.classList.add('disabled');
         } else {
             tableElement.classList.add('available');
@@ -43,6 +52,7 @@ function renderTables(tables) {
         grid.appendChild(tableElement);
     });
 }
+
 
 /**
  * Handles the selection of a table by the user

@@ -4,7 +4,7 @@ require __DIR__ . '/../vendor/autoload.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-$conn = new mysqli("localhost", "root", "cherylpinto", "restaurant_db");
+$conn = new mysqli("localhost", "root", "", "restaurant_db");
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -28,7 +28,7 @@ if (isset($_SESSION['email'])&& !isset($_SESSION['otp_sent'])) {
     $stmt->bind_param("ss", $email, $otp);
     $stmt->execute();
 
-    // Send OTP via PHPMailer
+    
     $mail = new PHPMailer(true);
     //$mail->SMTPDebug = 2; // Shows verbose debug info in browser
     //$mail->Debugoutput = 'html'; // Output format
