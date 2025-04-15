@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
     $time = $_POST['time'] ?? '';
     $people = $_POST['people'] ?? 1;
     $requests = $_POST['requests'] ?? '';
-    $status = $_POST['status'] ?? 'pending';
+    $status = $_POST['status'] ?? 'Pending';
 
     if (!$id) {
         die("No reservation ID provided.");
