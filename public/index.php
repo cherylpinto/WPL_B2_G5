@@ -224,7 +224,7 @@ if (!$isAuthenticated) {
         <button class="slider-btn next">&#10095;</button>
     </section>
 
-    <section class="reservation" id="reservation">
+<section class="reservation" id="reservation">
     <div class="reservation-container">
         <div class="reservation-image">
             <img src="../images/reservation.png" alt="Restaurant Interior">
@@ -265,10 +265,11 @@ if (!$isAuthenticated) {
                 const form = document.getElementById("reservation-form");
 
                 const now = new Date();
-                const todayStr = now.toISOString().split('T')[0];
+                const todayStr = now.toLocaleDateString('en-CA');
                 const maxDate = new Date();
                 maxDate.setDate(now.getDate() + 30);
-                const maxDateStr = maxDate.toISOString().split('T')[0];
+                const maxDateStr = maxDate.toLocaleDateString('en-CA');
+
 
                 dateInput.min = todayStr;
                 dateInput.max = maxDateStr;
