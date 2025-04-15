@@ -63,13 +63,13 @@ if (!$isAuthenticated) {
             </div>
             <div class="social-icons">
                 <div class="facebook">
-                    <a href="https://youtu.be/dQw4w9WgXcQ?si=9g3sxqHN8DY1ZZqh"><img src="../images/facebook.png" alt="Facebook"></a>
+                    <a href="#"><img src="../images/facebook.png" alt="Facebook"></a>
                 </div>
                 <div class="instagram">
-                    <a href="https://youtu.be/dQw4w9WgXcQ?si=9g3sxqHN8DY1ZZqh"><img src="../images/insta.jpg" alt="Instagram"></a>
+                    <a href="#"><img src="../images/insta.jpg" alt="Instagram"></a>
                 </div>
                 <div class="twitter">
-                    <a href="https://youtu.be/dQw4w9WgXcQ?si=9g3sxqHN8DY1ZZqh"><img src="../images/twitter.jpg" alt="Twitter"></a>
+                    <a href="#"><img src="../images/twitter.jpg" alt="Twitter"></a>
                 </div>
             </div>
         </div>
@@ -305,9 +305,9 @@ if (!$isAuthenticated) {
             <div class="footer-social">
                 <h3>FOLLOW US</h3>
                 <div class="social-icons">
-                    <a href="https://youtu.be/dQw4w9WgXcQ?si=9g3sxqHN8DY1ZZqh"><img src="../images/facebook.png" alt="Facebook"></a>
-                    <a href="https://youtu.be/dQw4w9WgXcQ?si=9g3sxqHN8DY1ZZqh"><img src="../images/insta.jpg" alt="Instagram"></a>
-                    <a href="https://youtu.be/dQw4w9WgXcQ?si=9g3sxqHN8DY1ZZqh"><img src="../images/twitter.jpg" alt="X"></a>
+                    <a href="#"><img src="../images/facebook.png" alt="Facebook"></a>
+                    <a href="#"><img src="../images/insta.jpg" alt="Instagram"></a>
+                    <a href="#"><img src="../images/twitter.jpg" alt="X"></a>
                 </div>
             </div>
         </div>
