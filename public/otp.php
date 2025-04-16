@@ -101,7 +101,7 @@ $conn->close();
         }
 
         .background-image {
-            background-image: url('../images/display.png'); 
+            background-image: url('../images/otp.png'); 
             background-size: cover;
             background-position: center;
             position: fixed;

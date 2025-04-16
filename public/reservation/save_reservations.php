@@ -70,7 +70,7 @@ if ($stmt->execute()) {
                     left: 0;
                     width: 100%;
                     height: 100%;
-                    background: url('../../images/display.png') no-repeat center center/cover;
+                    background: url('../../images/confirm.png') no-repeat center center/cover;
                     filter: blur(8px);
                     z-index: -1;
                 }
