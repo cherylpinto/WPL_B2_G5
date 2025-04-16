@@ -71,7 +71,7 @@ if ($stmt->execute()) {
                     width: 100%;
                     height: 100%;
                     background: url('../../images/confirm.png') no-repeat center center/cover;
-                    filter: blur(8px);
+                    filter: blur(5px);
                     z-index: -1;
                 }
 

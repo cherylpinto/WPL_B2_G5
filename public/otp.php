@@ -1,6 +1,7 @@
 <?php
 session_start();
-require __DIR__ . '/../vendor/autoload.php';  
+require __DIR__ . '/../vendor/autoload.php';
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -16,10 +17,10 @@ $error_message = "";
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_booking'])) {
     $_SESSION['form_data'] = $_POST;
     $_SESSION['email'] = $_POST['email'];
-    unset($_SESSION['otp_sent']); 
+    unset($_SESSION['otp_sent']);
 }
 
-if (isset($_SESSION['email'])&& !isset($_SESSION['otp_sent'])) {
+if (isset($_SESSION['email']) && !isset($_SESSION['otp_sent'])) {
     $email = $_SESSION["email"];
     $otp = rand(100000, 999999);
 
@@ -28,7 +29,7 @@ if (isset($_SESSION['email'])&& !isset($_SESSION['otp_sent'])) {
     $stmt->bind_param("ss", $email, $otp);
     $stmt->execute();
 
-    
+
     $mail = new PHPMailer(true);
     //$mail->SMTPDebug = 2; // Shows verbose debug info in browser
     //$mail->Debugoutput = 'html'; // Output format
@@ -36,10 +37,10 @@ if (isset($_SESSION['email'])&& !isset($_SESSION['otp_sent'])) {
 
     try {
         $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com'; 
+        $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'aurelias.management@gmail.com'; 
-        $mail->Password = 'qsbb ewob tvgs vnhk'; 
+        $mail->Username = 'aurelias.management@gmail.com';
+        $mail->Password = 'qsbb ewob tvgs vnhk';
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
 
@@ -52,13 +53,12 @@ if (isset($_SESSION['email'])&& !isset($_SESSION['otp_sent'])) {
 
         $mail->send();
         $_SESSION['otp_sent'] = true;
-        $success = 1; 
+        $success = 1;
     } catch (Exception $e) {
         $error_message = "OTP could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
-}
-else if (isset($_SESSION['otp_sent'])) {
-    $success = 1; 
+} else if (isset($_SESSION['otp_sent'])) {
+    $success = 1;
 }
 
 if (isset($_POST["submit_otp"])) {
@@ -90,39 +90,43 @@ $conn->close();
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>OTP Verification</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
-        body, html {
+        body,
+        html {
             height: 100%;
             margin: 0;
             font-family: Arial, sans-serif;
         }
 
         .background-image {
-            background-image: url('../images/otp.png'); 
+            background-image: url('../images/otp.png');
             background-size: cover;
             background-position: center;
             position: fixed;
             height: 100%;
             width: 100%;
-            filter: blur(8px);
+            filter: blur(6px);
             z-index: -1;
         }
+
         .otp-container {
             background: rgba(255, 255, 255, 0.85);
             border-radius: 10px;
             padding: 2rem;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-
         }
     </style>
 </head>
+
 <body class="bg-light">
-<div class="background-image"></div>
-    <div class="container mt-5" style="align-items: center">
-        <div class="col-md-6 offset-md-3 bg-white p-4 rounded shadow otp-container">
+    <div class="background-image"></div>
+    <div class="container d-flex justify-content-center align-items-center" style="min-height: 40vh;">
+        <div class="col-md-6 bg-white p-4 rounded shadow otp-container">
+
             <?php if (!empty($error_message)) { ?>
                 <div class="alert alert-danger"><?php echo $error_message; ?></div>
             <?php } ?>
@@ -137,4 +141,5 @@ $conn->close();
         </div>
     </div>
 </body>
+
 </html>
