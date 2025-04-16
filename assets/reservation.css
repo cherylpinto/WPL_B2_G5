@@ -1,66 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
 .reservation {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 70px;
-
 }
+
 .reservation-container {
     display: flex;
     align-items: center;
     gap: 40px;
     background: #ffffff;
     padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width:100%;
-    transition: transform 0.3s ease-in-out;
+    max-width: 100%;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .reservation-container:hover {
     transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(255, 77, 77, 0.3);
 }
+
 .reservation-image img {
     width: 100%;
     max-width: 500px;
-    border-radius: 12px;
+    border-radius: 16px;
     object-fit: cover;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 15px rgba(255, 77, 77, 0.2);
 }
+
 .reservation-form {
     flex: 1;
     padding: 20px;
 }
+
 .reservation-form h2 {
     text-align: center;
-    color: #b30000;
+    color: #d90429;
     margin-bottom: 20px;
     font-style: italic;
-    font-size: 22px;
-    letter-spacing: 1px;
+    font-size: 26px;
+    letter-spacing: 1.5px;
+    text-shadow: 0 0 5px rgba(217, 4, 41, 0.2);
 }
+
 .reservation-form label {
     font-weight: 600;
     display: block;
     margin: 12px 0 6px;
-    color: #444;
+    color: #333;
 }
+
 .reservation-form input,
 .reservation-form textarea {
     width: 100%;
     padding: 12px;
     margin-bottom: 12px;
+    background-color: #f1f1f1;
     border: 1px solid #ccc;
-    border-radius: 6px;
+    border-radius: 8px;
     font-size: 15px;
+    color: #333;
     transition: border 0.3s, box-shadow 0.3s;
 }
+
 .reservation-form input:focus,
 .reservation-form textarea:focus {
-    border-color: #b30000;
+    border-color: #d90429;
     outline: none;
-    box-shadow: 0 0 8px rgba(179, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgba(217, 4, 41, 0.3);
 }
 
 .reservation-form textarea {
@@ -71,22 +83,45 @@
 .btn-reserve {
     width: 100%;
     padding: 12px;
-    background: #b30000;
+    background: linear-gradient(135deg, #ff4d4d, #d90429);
     color: white;
     border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: bold;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: 600;
     cursor: pointer;
-    transition: background 0.3s, transform 0.2s;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 12px rgba(255, 77, 77, 0.3);
 }
 
 .btn-reserve:hover {
-    background: #800000;
-    transform: translateY(-2px);
+    background: linear-gradient(135deg, #ff1a1a, #bb0322);
+    transform: translateY(-3px);
+    box-shadow: 0 0 18px rgba(255, 77, 77, 0.5);
 }
 
 .btn-reserve:active {
-    background: #660000;
+    background: #a1001d;
     transform: translateY(0);
+}
+
+/* Style calendar and clock inputs */
+.reservation-form input[type="date"],
+.reservation-form input[type="time"] {
+    color: #333;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+}
+
+.reservation-form input[type="date"]::-webkit-calendar-picker-indicator,
+.reservation-form input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(0);
+    cursor: pointer;
+}
+
+/* For Firefox */
+.reservation-form input[type="date"]::-moz-focus-inner,
+.reservation-form input[type="time"]::-moz-focus-inner {
+    color: #333;
 }
