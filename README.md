@@ -7,6 +7,7 @@
 ## ✨ Features
 
 ### 👥 User Perspective
+
 - Home page with sections: Home, Menu, Chefs, Feedback, Reserve Table, Footer
 - Reservation system:
   - Fill out reservation form
@@ -15,9 +16,10 @@
 - Modify, cancel, and view reservations
 - Conflicts avoided: User warned if a selected time conflicts with another reservation within 1 hour
 - Booked tables marked in **red**
-- User authentication (Login/Signup)
+- User authentication (Login/Signup) : MVC
 
 ### 🛠️ Admin Perspective
+
 - Secure login for admins
 - View all reservations
 - Approve or reject reservations
@@ -38,28 +40,93 @@
 ## ⚙️ Installation & Setup
 
 ### 1️⃣ Clone the Repository
+
 ```bash
 git clone https://github.com/cherylpinto/WPL_B2_G5.git
 cd WPL_B2_G5
+```
 
----
-### 2️⃣ Start XAMPP
-- Launch **XAMPP Control Panel**.
-- Start the following modules:
-  - **Apache**
-  - **MySQL**
+### 2️⃣ Move Project to XAMPP's htdocs Folder
 
-### 3️⃣ Set Up the Database
+Copy or move the entire `WPL_B2_G5/` folder to your XAMPP installation directory's `htdocs` folder:
 
-- Open [phpMyAdmin](http://localhost/phpmyadmin)
-- Create a new database (e.g., `aurelias_db`)
-- Import the provided `.sql` file(s) located in the project directory to set up the tables.
+```bash
+C:/xampp/htdocs/
+```
 
-### 4️⃣ Configure PHPMailer
+### 3️⃣ Start XAMPP
 
-- Open a terminal in the project root and run the following command:
+1. Launch the **XAMPP Control Panel**.
+2. Start the following modules:
+   - **Apache**
+   - **MySQL**
+
+### 4️⃣ Set Up the Database
+
+1. Open [phpMyAdmin](http://localhost/phpmyadmin) in your browser.
+2. Create a new database (e.g., `restaurant_db`).
+3. Import the `.sql` file provided in the project directory:
+   - Click on the new database.
+   - Go to the **Import** tab.
+   - Choose the `.sql` file.
+   - Click **Go** to import.
+
+### 5️⃣ Configure PHPMailer
+
+1. Open a terminal in the project root directory.
+2. Run the following command to install PHPMailer and its dependencies:
 
 ```bash
 composer install
+```
 
--This will install PHPMailer and required dependencies.
+> 📦 This installs **PHPMailer** and required dependencies.
+
+### 6️⃣ Edit Configuration (if needed)
+
+- Update database credentials in your PHP files:
+    -> `database.php` (app/config/)
+    -> `connect.php`(public/reservation/)
+    -> `otp.php` (public)
+
+```php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "restaurant_db";
+```
+
+- Update mail settings (SMTP host, port, user, and password) in the mail-related PHP file.
+
+### 7️⃣ Access the Website
+
+Navigate to the login page:
+
+```url
+http://localhost/WPL_B2_G5/public/login.php
+```
+
+---
+
+## 📧 Email Setup Notes
+
+- OTPs and confirmation mails are sent using PHPMailer.
+- If using Gmail SMTP:
+  - Enable **2-Step Verification**
+  - Generate an **App Password**
+- Ensure your hosting or local server supports SMTP connections.
+
+---
+
+## ✅ Future Enhancements (Optional Ideas)
+
+- Reservation history for users
+- Table QR code for in-place confirmation
+- Responsive improvements
+- Notification system for admins
+
+---
+
+Feel free to contribute or report any issues.  
+Enjoy reserving with **Aurelia's**! 🍽️
+```
