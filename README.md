@@ -124,7 +124,7 @@ http://localhost/WPL_B2_G5/public/login.php
 
 ---
 
-## ✅ Future Enhancements (Optional Ideas)
+## ✅ Future Enhancements
 
 - Reservation history for users
 - Table QR code for in-place confirmation
