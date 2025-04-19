@@ -88,7 +88,9 @@ composer install
 
   
     -> `database.php` (app/config/)
+  
     -> `connect.php`(public/reservation/)
+  
     -> `otp.php` (public)
 
   
