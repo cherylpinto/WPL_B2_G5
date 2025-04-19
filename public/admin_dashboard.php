@@ -20,6 +20,19 @@ $result = $conn->query($query);
     <meta charset="UTF-8">
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="../assets/admin.css">
+    <style>
+        .view-reservations-btn {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-right: 80px;
+        }
+    </style>
 </head>
 
 <body>
@@ -29,6 +42,9 @@ $result = $conn->query($query);
     </div>
 
 
+    <div style="text-align: right; margin-bottom:-20px;">
+        <a href="admin_tables.php" class="view-reservations-btn">View Reservations</a>
+    </div>
     <table border="1" cellpadding="10" cellspacing="0">
         <tr>
             <th>Reservation ID</th>

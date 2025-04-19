@@ -92,6 +92,34 @@ function fetchTables(peopleCount, date, time) {
         .catch(error => console.error('Fetch error:', error));
 }
 
+function renderAdminTableGrid(tables, reservationsMap) {
+    const grid = document.getElementById('table-grid');
+    grid.innerHTML = '';
+
+    tables.forEach(table => {
+        const tableElement = document.createElement('div');
+        const capacity = parseInt(table.capacity, 10);
+        let sizeClass = 'small';
+        if (capacity === 10) sizeClass = 'xlarge';
+        else if (capacity === 6) sizeClass = 'large';
+        else if (capacity === 4) sizeClass = 'medium';
+
+        tableElement.className = `table ${sizeClass}`;
+        tableElement.textContent = `Table ${table.table_id} (${capacity})`;
+
+        const booking = reservationsMap[table.table_id];
+
+        if (booking) {
+            tableElement.classList.add('reserved');
+            tableElement.setAttribute('data-tooltip', `Booked by: ${booking.name} (${booking.email}, ${booking.phone})`);
+        } else {
+            tableElement.classList.add('available');
+        }
+
+        grid.appendChild(tableElement);
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const peopleInput = document.getElementById('form-people');
     const dateInput = document.getElementById('form-date')?.value;
