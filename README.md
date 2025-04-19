@@ -85,9 +85,13 @@ composer install
 ### 6️⃣ Edit Configuration (if needed)
 
 - Update database credentials in your PHP files:
+
+  
     -> `database.php` (app/config/)
     -> `connect.php`(public/reservation/)
     -> `otp.php` (public)
+
+  
 
 ```php
 $servername = "localhost";
