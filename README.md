@@ -39,5 +39,27 @@
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone https://github.com/
-cd aurelias
+git clone https://github.com/cherylpinto/WPL_B2_G5.git
+cd WPL_B2_G5
+
+---
+### 2️⃣ Start XAMPP
+- Launch **XAMPP Control Panel**.
+- Start the following modules:
+  - **Apache**
+  - **MySQL**
+
+### 3️⃣ Set Up the Database
+
+- Open [phpMyAdmin](http://localhost/phpmyadmin)
+- Create a new database (e.g., `aurelias_db`)
+- Import the provided `.sql` file(s) located in the project directory to set up the tables.
+
+### 4️⃣ Configure PHPMailer
+
+- Open a terminal in the project root and run the following command:
+
+```bash
+composer install
+
+-This will install PHPMailer and required dependencies.
