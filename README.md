@@ -135,4 +135,3 @@ http://localhost/WPL_B2_G5/public/login.php
 
 Feel free to contribute or report any issues.  
 Enjoy reserving with **Aurelia's**! 🍽️
-```
