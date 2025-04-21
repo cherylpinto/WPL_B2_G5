@@ -248,7 +248,7 @@ if (!$isAuthenticated) {
                 <input type="date" id="date" name="date" required>
 
                 <label for="time">Time</label>
-                <input type="time" id="time" name="time" required>
+                <input type="time" id="time" name="time" required >
 
                 <label for="people">Number of people</label>
                 <input type="number" id="people" name="people" placeholder="Number of people" required min="1" max="10">

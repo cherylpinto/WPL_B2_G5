@@ -128,7 +128,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
 
             <div class="form-group">
                 <label for="people">People:</label>
-                <input type="number" id="people" name="people" value="<?php echo htmlspecialchars($reservation['people']); ?>" class="form-control" required>
+                <input type="number" id="people" name="people" value="<?php echo htmlspecialchars($reservation['people']); ?>" class="form-control" required readonly>
             </div>
 
             <div class="form-group">
