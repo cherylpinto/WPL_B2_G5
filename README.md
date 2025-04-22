@@ -109,7 +109,7 @@ $dbname = "restaurant_db";
 Navigate to the login page:
 
 ```url
-http://localhost/WPL_B2_G5/public/login.php
+http://localhost/WPL_B2_G5/public/index.php
 ```
 
 ---
